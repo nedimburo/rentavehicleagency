@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handle Request</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="simple-container">
+		<h1 class="simple-header">Handle Request</h1>
+		<a th:href="@{/rent-dashboard-page}" class="redirect-button">Return</a>
+		<div class="form-vehicle-image-container">
+			<img th:if="${vehicleImage.getImageName() != null}" th:src="'/vehicle_images/'+${vehicleImage.getImageName()}" alt="Vehicle Image" class="scale-image">
+		</div>
+		<div class="request-info-container">
+			<div>
+				<p>Client name: <span th:text="${clientUser.getFirstName() + ' ' + clientUser.getLastName()}"></span></p>
+				<p>Email: <span th:text="${clientUser.getEmail()}"></span></p>
+				<p>JMBG: <span th:text="${client.getJmbg()}"></span></p>
+				<p>Bank Information: <span th:text="${client.getBankInformation()}"></span></p>
+				<p>License number: <span th:text="${client.getLicenseNumber()}"></span></p>
+			</div>
+			<div>
+				<p>Vehicle name: <span th:text="${vehicle.getBrand() + ' ' + vehicle.getModelName()}"></span></p>
+				<p>Registration plates: <span th:text="${vehicle.getRegistrationPlate()}"></span></p>
+				<p>Model Year: <span th:text="${vehicle.getModelYear()}"></span></p>
+				<p>Price: <span th:text="${vehicle.getPrice()}"></span>$</p>
+			</div>
+		</div>
+		<div class="request-details-container">
+			<p>Start date: <span th:text="${request.getStartTime()}"></span></p>
+			<p>End date: <span th:text="${request.getEndTime()}"></span></p>
+			<p>Payment method: <span th:text="${request.getPaymentMethod()}"></span></p>
+		</div>
+		<form th:action="@{/deny-request/{id}(id=${request.getId()})}" method="post">
+			<label for="note">Deny Reason:</label>
+			<br/>
+			<textarea id="note" name="note" rows="8" cols="60" placeholder="Enter deny reason" required></textarea>
+			<br/>
+			<a th:href="@{/handle-request/{id}/approve(id=${request.getId()})}" class="form-button green-button-bg">Approve</a>
+			<input type="submit" value="Deny" class="form-button red-button-bg">
+		</form>
+	</div>
+</body>
+</html>

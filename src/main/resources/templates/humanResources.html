@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Resources Page</title>
+    <link rel="stylesheet" th:href="@{/css/mainPages.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="header-container">
+		<h1 class="header-title">Human Resources Page</h1>
+		<div>
+			<a th:href="@{/add-employee-hr}" class="header-button">Add Employee</a>
+			<a th:href="@{/add-report}" class="header-button">Create Report</a>
+			<span sec:authorize="isAuthenticated"><a th:href="@{/logout}" class="header-button">Logout</a></span>
+		</div>
+	</div>
+	
+	<div class="section-header-container">
+		<h2 class="section-header">List of Employees that work in "<span th:text="${business.getName()}"></span>" business:</h2>
+	</div>
+	
+	<div class="section-container">
+		<div th:each="employee : ${businessEmployees}" th:if="${user.getEmail()}!=${employee.getUser().getEmail()}" class="employee-info-container">
+			<p class="section-text">Name: <span th:text="${employee.getUser().getFirstName() + ' ' + employee.getUser().getLastName() + ' (' + employee.getUser().getEmail() + ')'}"></span></p>
+			<p class="section-text"><span th:text="${employee.getUser().getGender() + ' (' + employee.getUser().getBirthDate() + ')'}"></span></p>
+			<p class="section-text">JMBG: <span th:text="${employee.getJmbg()}"></span></p>
+			<p class="section-text">Address: <span th:text="${employee.getAddress() + ' (' + employee.getCity() + ')'}"></span></p>
+			<p class="section-text">Contact Number: <span th:text="${employee.getContactNumber()}"></span></p>
+			<p class="section-text">Employment Status: <span th:text="${employee.getEmploymentStatus() + ' Pay: ' + employee.getPay() + '$'}"></span></p>
+			<p class="section-text">Hire Date: <span th:text="${employee.getHireDate()}"></span></p>
+			<a th:href="@{/fire-employee/{id}(id=${employee.getId()})}" class="section-button red-button-bg">Fire Employee</a>
+		</div>
+	</div>
+	
+</body>
+</html>

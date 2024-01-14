@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Director Page</title>
+    <link rel="stylesheet" th:href="@{/css/mainPages.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="header-container">
+		<h1 class="header-title">Director Page</h1>
+		<div>
+			<span sec:authorize="isAuthenticated"><a th:href="@{/logout}" class="header-button">Logout</a></span>
+		</div>
+	</div>
+	
+	<div class="section-header-container">
+		<h2 class="section-header">Details about: "<span th:text="${business.getName()}"></span>" business:</h2>
+	</div>
+	
+	<div class="business-info-container">
+		<div class="business-image-container">
+			<img src="/images/businessicon.png" alt="Business Icon" class="scale-image">
+		</div>
+		<p class="section-text">Business ID: <span th:text="${business.getId()}"></span></p>
+		<p class="section-text">Name: <span th:text="${business.getName()}"></span></p>
+		<p class="section-text">Location: <span th:text="${business.getAddress() + ' (' + business.getCity() + ')'}"></span></p>
+		<p class="section-text">Proift: <span th:text="${business.getProfit()}"></span>$</p>
+		<p class="section-text">Created date: <span th:text="${business.getCreationDate()}"></span></p>
+	</div>
+	
+	<div class="section-header-container">
+		<h2 class="section-header">All vehicles that belong to: "<span th:text="${business.getName()}"></span>" business:</h2>
+	</div>
+	
+	<div class="vehicle-list-container">
+		<div th:each="vehicle : ${allVehiclesWithImages}" class="vehicle-info-container">
+			<div class="vehicle-image-container">
+				<img th:if="${vehicle.getImageName() != null}" th:src="'/vehicle_images/'+${vehicle.getImageName()}" alt="Vehicle Image" class="scale-image">
+			</div>
+			<p class="vehicle-info-text">Name: <span th:text="${vehicle.getBrand() + ' ' + vehicle.getModelName()}"></span></p>
+			<p class="vehicle-info-text">Year: <span th:text="${vehicle.getModelYear()}"></span></p>
+			<p class="vehicle-info-text">Price: <span th:text="${vehicle.getPrice()}"></span></p>
+			<p class="vehicle-info-text">Status: <span th:text="${vehicle.getStatus()}"></span></p>
+		</div>
+	</div>
+	
+</body>
+</html>

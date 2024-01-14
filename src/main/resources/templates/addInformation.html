@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Information</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="simple-container">
+		<h1 class="simple-header">Add Information</h1>
+		<a th:href="@{/profile/{id}(id=${client.getUser().getId()})}" class="redirect-button">Return</a>
+		<form th:action="@{/profile/{id}/submit-information(id=${client.getUser().getId()})}" method="post" th:object="${client}">
+			<label for="address">Address:</label>
+			<input th:field="*{address}" type="text" id="address" name="address" placeholder="Enter your address" required>
+			<br/>
+			<label for="contactNumber">Contact Number:</label>
+			<input th:field="*{contactNumber}" type="text" id="contactNumber" name="contactNumber" placeholder="Enter your contact number" required>
+			<br/>
+			<label for="jmbg">JMBG:</label>
+			<input th:field="*{jmbg}" type="text" id="jmbg" name="jmbg" placeholder="Enter your JMBG" required>
+			<br/>
+			<label for="bankInformation">Bank Information:</label>
+			<input th:field="*{bankInformation}" type="text" id="bankInformation" name="bankInformation" placeholder="Enter your bank information" required>
+			<br/>
+			<label for="licenseNumber">License Number:</label>
+			<input th:field="*{licenseNumber}" type="text" id="licenseNumber" name="licenseNumber" placeholder="Enter your license number" required>
+			<br/>
+			<input type="submit" value="Submit Information" class="form-button">
+		</form>
+	</div>
+</body>
+</html>

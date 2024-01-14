@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected Vehicle</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="/js/slideshow.js"></script>
+</head>
+<body>
+	<div class="simple-container">
+		<h1 class="simple-header">Selected Vehicle</h1>
+		<a th:href="@{/user-page}" class="redirect-button">Return</a>
+		<div th:if="${client.getIsConfirmed}==0" class="simple-message">
+			Your profile is not confirmed and you cannot make rent requests. <br/>Please go to profile page and add additional information first.
+		</div>
+		<div th:each="vehicleImage : ${vehicleImages}" class="slide-vehicle-image-container forSlide">
+			<img th:if="${vehicleImage.getImageName() != null}" th:src="'/vehicle_images/'+${vehicleImage.getImageName()}" alt="Vehicle Image" class="scale-image">
+		</div>
+		<div class="image-controls-container">
+			<a href="#" class="prev">&lt;</a>
+			<a href="#" class="next">&gt;</a>
+		</div>
+		<div class="selected-vehicle-info-container">
+			<p>Vehicle Name: <span th:text="${vehicle.getBrand() + ' ' + vehicle.getModelName()}"></span></p>
+			<p>Model Year: <span th:text="${vehicle.getModelYear()}"></span></p>
+			<p>Engine: <span th:text="${vehicle.getEngineDisplacement() + ' cc (' + vehicle.getHorsepower() + ' hp) ' + vehicle.getFuel()}"></span></p>
+			<p>Transmission: <span th:text="${vehicle.getTransmission()}"></span></p>
+			<p>Body type: <span th:text="${vehicle.getBodyShape() + ' ' + vehicle.getColor()}"></span></p>
+			<p>Price: <span th:text="${vehicle.getPrice() + ' $'}"></span></p>
+		</div>			
+		<form th:action="@{/selected-vehicle/{vehicleId}/create-request(vehicleId=${vehicle.getId()})}" th:object="${request}" method="post"
+		th:if="${vehicle.getStatus()}=='AVAILABLE' and ${client.getIsConfirmed}==1">
+			<label for="startTime">Choose Start Date and time:</label>
+			<input th:field="*{startTime}" name="startTime" id="startTime" type="datetime-local" required>
+			<br/>
+			<label for="endTime">Choose Start Date and time:</label>
+			<input th:field="*{endTime}" name="endTime" id="endTime" type="datetime-local" required>
+			<br/>
+			<label for="paymentMethod">Payment Method:</label>
+			<select id="paymentMethod" th:field="*{paymentMethod}">
+				<option th:value="ONLINE" th:text="ONLINE" selected></option>
+				<option th:value="CASH" th:text="CASH"></option>
+			</select>
+			<br/>		
+			<input type="submit" value="Create Request" class="form-button">
+		</form>
+		<div th:if="${vehicle.getStatus()}=='DAMAGED'" class="simple-message">
+			This vehicle is damaged and can't be rented at this moment.
+		</div>
+		<div th:if="${vehicle.getStatus()}=='RENTED'" class="simple-message">
+			This vehicle is currently rented and is not available at the moment.
+		</div>
+	</div>
+</body>
+</html>

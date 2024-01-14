@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add vehicle</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="simple-container">
+		<h1 class="simple-header">Add Vehicle</h1>
+		<a th:href="@{/owner-page}" class="redirect-button">Return</a>
+		<form th:action="@{/add-vehicle-submit}" th:object="${vehicleDto}" method="post" enctype="multipart/form-data">
+			<label for="brand">Brand:</label>
+			<input th:field="*{brand}" name="brand" id="brand" type="text" required>
+			<br/>
+			<label for="modelName">Model Name:</label>
+			<input th:field="*{modelName}" name="modelName" id="modelName" type="text" required>
+			<br/>
+			<label for="modelYear">Model Year:</label>
+			<input th:field="*{modelYear}" name="modelYear" id="modelYear" type="number" required>
+			<br/>
+			<label for="registrationPlate">Registration Plate:</label>
+			<input th:field="*{registrationPlate}" name="registrationPlate" id="registrationPlate" type="text" required>
+			<br/>
+			<label for="engineDisplacement">Engine Displacement(in cc):</label>
+			<input th:field="*{engineDisplacement}" name="engineDisplacement" id="engineDisplacement" type="number" required>
+			<br/>
+			<label for="horsepower">Horsepower:</label>
+			<input th:field="*{horsepower}" name="horsepower" id="horsepower" type="number" required>
+			<br/>
+			<label for="fuel">Fuel:</label>
+			<select id="fuel" th:field="*{fuel}">
+				<option th:value="Gasoline" th:text="Gasoline" selected></option>
+				<option th:value="Diesel" th:text="Diesel"></option>
+			</select>
+			<br/>
+			<label for="transmission">Transmission:</label>
+			<select id="transmission" th:field="*{transmission}">
+				<option th:value="Manual" th:text="Manual" selected></option>
+				<option th:value="Automatic" th:text="Automatic"></option>
+			</select>
+			<br/>
+			<label for="color">Color:</label>
+			<input th:field="*{color}" name="color" id="color" type="text" required>
+			<br/>
+			<label for="type">Type:</label>
+			<select id="type" th:field="*{type}">
+				<option th:value="Car" th:text="Car" selected></option>
+				<option th:value="Motorbike" th:text="Motorbike"></option>
+			</select>
+			<br/>
+			<label for="bodyShape">Body Shape:</label>
+			<select id="bodyShape" th:field="*{bodyShape}">
+				<option th:value="Sedan" th:text="Sedan" selected></option>
+				<option th:value="Coupe" th:text="Coupe"></option>
+				<option th:value="SUV" th:text="SUV"></option>
+				<option th:value="Wagon" th:text="Wagon"></option>
+				<option th:value="Hatchback" th:text="Hatchback"></option>
+				<option th:value="Enduro" th:text="Enduro"></option>
+				<option th:value="Cross" th:text="Cross"></option>
+				<option th:value="Sport" th:text="Sport"></option>
+				<option th:value="Quad" th:text="Quad"></option>
+			</select>
+			<br/>
+			<label for="price">Price:</label>
+			<input th:field="*{price}" name="price" id="price" type="number" step="0.01" required>
+			<br/>
+			<label>Select to which business the vehicle belongs:</label>
+			<select th:field="*{businessName}">
+				<option th:each="business : ${allBusinesses}" th:value="${business.name}" th:text="${business.name}"></option>
+			</select>
+			<br/>
+			<label for="images">Upload multiple vehicle images: </label>
+			<input th:field="*{images}" name="images" id="images" type="file" multiple="multiple" accept=".jpg, .png" required>
+			<br/>
+			<input type="submit" value="Add Vehicle" class="form-button">
+		</form>
+	</div>
+</body>
+</html>

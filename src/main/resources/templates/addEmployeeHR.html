@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Employee</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="simple-container">
+		<h1 class="simple-header">Add Employee</h1>
+		<a th:href="@{/hr-page}" class="redirect-button">Return</a>
+		<form th:action="@{/add-employee-hr-submit}" method="post" th:object="${employeeDto}">
+			<label for="firstName">First Name:</label>
+	        <input th:field="*{firstName}" type="text" id="firstName" name="firstName" placeholder="Enter employees first name" required>
+			<br/>
+	        <label for="lastName">Last Name:</label>
+	        <input th:field="*{lastName}" type="text" id="lastName" name="lastName" placeholder="Enter employees last name" required>
+			<br/>
+	        <label for="nickname">Nickname:</label>
+	        <input th:field="*{nickname}" type="text" id="nickname" name="nickname" placeholder="Enter employees nickname" required>
+			<br/>
+	        <label for="email">Email:</label>
+	        <input th:field="*{email}" type="email" id="email" name="email" placeholder="Enter employees email" required>
+			<br/>
+	        <label for="password">Password:</label>
+	        <input th:field="*{password}" type="password" id="password" name="password" placeholder="Enter employees password" required>
+			<br/>
+			<label for="gender">Gender:</label>
+			<select id="gender" th:field="*{gender}">
+				<option th:value="Male" th:text="Male" selected></option>
+				<option th:value="Female" th:text="Female"></option>
+			</select>
+			<br/>
+			<label for="birthDate">Birth Date:</label>
+	        <input th:field="*{birthDate}" type="date" id="birthDate" name="birthDate" required>
+	        <br/>
+	        <label for="jmbg">JMBG:</label>
+			<input th:field="*{jmbg}" type="text" id="jmbg" name="jmbg" placeholder="Enter employees JMBG" required>
+			<br/>
+			<label for="pay">Pay:</label>
+			<input th:field="*{pay}" type="number" id="pay" name="pay" placeholder="Enter employees pay" step="0.01" required>
+			<br/>
+			<label for="address">Address:</label>
+			<input th:field="*{address}" type="text" id="address" name="address" placeholder="Enter employees address" required>
+			<br/>
+			<label for="city">City:</label>
+			<input th:field="*{city}" type="text" id="city" name="city" placeholder="Enter employees city" required>
+			<br/>
+			<label for="contactNumber">Contact Number:</label>
+			<input th:field="*{contactNumber}" type="text" id="contactNumber" name="contactNumber" placeholder="Enter employees contact number" required>
+			<br/>
+			<label for="employmentStatus">Employment Status:</label>
+			<select id="employmentStatus" th:field="*{employmentStatus}">
+				<option th:value="FULLTIME" th:text="Full-Time" selected></option>
+				<option th:value="PARTTIME" th:text="Part-Time"></option>
+			</select>
+			<br/>
+			<label for="role">Role:</label>
+			<select id="role" th:field="*{role}">
+				<option th:value="RENTEMPLOYEE" th:text="Rent" selected></option>
+				<option th:value="MAINTEMPLOYEE" th:text="Maintenance"></option>
+			</select>
+			<br/>
+			<label>Select in which business the employee will work:</label>
+			<select th:field="*{name}">
+				<option th:each="business : ${allBusinesses}" th:value="${business.name}" th:text="${business.name}"></option>
+			</select>
+			<br/>
+			<input type="submit" value="Add Employee" class="form-button">
+		</form>
+	</div>
+</body>
+</html>

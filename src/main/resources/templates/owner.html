@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owners Page</title>
+    <link rel="stylesheet" th:href="@{/css/mainPages.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="header-container">
+		<h1 class="header-title">Owners Page</h1>
+		<div>
+			<a th:href="@{/add-business}" class="header-button">Add new Business</a>
+			<a th:href="@{/add-director}" class="header-button">Add new Director</a>
+			<a th:href="@{/add-employee}" class="header-button">Add new Employee</a>
+			<a th:href="@{/add-vehicle}" class="header-button">Add new Vehicle</a>
+			<span sec:authorize="isAuthenticated"><a th:href="@{/logout}" class="header-button">Logout</a></span>
+		</div>
+	</div>
+	
+	<div class="section-header-container">
+		<h2 class="section-header">All agency businesses:</h2>
+	</div>
+	<div class="section-container">
+		<div th:each="business : ${allBusinesses}" class="business-info-container-owner">
+			<div class="business-image-container">
+				<img src="/images/businessicon.png" alt="Business Icon" class="scale-image">
+			</div>
+			<p class="section-text">Business ID: <span th:text="${business.getId()}"></span></p>
+			<p class="section-text">Name: <span th:text="${business.getName()}"></span></p>
+			<p class="section-text">Location: <span th:text="${business.getAddress() + ' (' + business.getCity() + ')'}"></span></p>
+			<p class="section-text">Proift: <span th:text="${business.getProfit()}"></span>$</p>
+			<p class="section-text">Created date: <span th:text="${business.getCreationDate()}"></span></p>
+		</div>
+	</div>
+	
+	<div class="section-header-container">
+		<h2 class="section-header">List of reports:</h2>
+	</div>
+	<div class="section-container">
+		<div th:each="report : ${allReports}" class="report-info-container-owner">
+			<div class="report-image-container">
+				<img src="/images/reporticon.png" alt="Report Icon" class="scale-image">
+			</div>
+			<p class="section-text">Title: <span th:text="${report.getTitle()}"></span></p>
+			<p class="section-text">Priority: <span th:text="${report.getPriority()}"></span></p>
+			<p class="section-text">Creation Date: <span th:text="${report.getCreationDate()}"></span></p>
+			<p class="section-text">Employee: <span th:text="${report.getEmployee().getUser().getFirstName() + ' ' + report.getEmployee().getUser().getLastName()}"></span></p>
+			<p class="section-text">Role: <span th:text="${report.getEmployee().getUser().getRole()}"></span></p>
+		</div>
+	</div>
+	
+	<div class="section-header-container">
+		<h2 class="section-header">List of agency vehicles:</h2>
+	</div>
+	<div class="section-container">
+		<div th:each="vehicle : ${allVehiclesWithImages}" class="owner-vehicle-container">
+			<div class="owner-image-container">
+				<img th:if="${vehicle.getImageName() != null}" th:src="'/vehicle_images/'+${vehicle.getImageName()}" alt="Vehicle Image" class="scale-image">
+			</div>
+			<p class="offer-text">Brand: <span th:text="${vehicle.getBrand()}"></span></p>
+			<p class="offer-text">Model Name: <span th:text="${vehicle.getModelName()}"></span></p>
+			<p class="offer-text">Price: <span th:text="${vehicle.getPrice() + ' $'}"></span></p>
+			<a th:href="@{/remove-vehicle/{id}(id=${vehicle.getId()})}" class="form-button-extended red-button-bg">REMOVE</a>
+		</div>
+	</div>
+	
+</body>
+</html>

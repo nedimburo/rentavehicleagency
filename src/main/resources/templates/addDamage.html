@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Damage</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Oswald&family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="simple-container">
+		<h1 class="simple-header">Add Damage</h1>
+		<a th:href="@{/maintenance-dashboard-page}" class="redirect-button">Return</a>
+		<div class="form-vehicle-image-container">
+			<img th:if="${vehicleImage.getImageName() != null}" th:src="'/vehicle_images/'+${vehicleImage.getImageName()}" alt="Vehicle Image" class="scale-image">
+		</div>
+		<h2 class="smaller-simple-header">Add damage details</h2>
+		<form th:action="@{/report-damage/{vehicleId}/submit(vehicleId=${vehicle.getId()})}" th:object="${damage}" method="post">
+			<label>Damage Type:</label>
+			<select id="damageType" th:field="*{damageType}">
+					<option th:value="ENGINE" th:text="Engine" selected></option>
+					<option th:value="TRANSMISSION" th:text="Transmission"></option>
+					<option th:value="SUSPENSION" th:text="Suspension"></option>
+					<option th:value="BRAKES" th:text="Brakes"></option>
+					<option th:value="INTERIOR" th:text="Interior"></option>
+					<option th:value="EXTERIOR" th:text="Exterior"></option>
+			</select>
+			<br/>
+			<label for="description">Description:</label>
+			<br/>
+			<textarea th:field="*{description}" id="description" name="description" placeholder="Enter damage description" rows="10" cols="80" required></textarea>
+			<br/>
+			<label for="repairCost">Repair Cost:</label>
+			<input th:field="*{repairCost}" type="number" id="repairCost" name="repairCost" placeholder="Enter damage repair cost" step="0.01" required>
+			<br/>
+			<input type="submit" value="Add Damage" class="form-button">
+		</form>
+	</div>
+</body>
+</html>
