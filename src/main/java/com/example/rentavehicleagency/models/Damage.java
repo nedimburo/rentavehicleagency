@@ -12,9 +12,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.*;
 
+@Getter
+@Setter
 @Entity
 @Table(name="damages")
+@NoArgsConstructor
+@ToString(onlyExplicitlyIncluded = true, callSuper = true)
 public class Damage {
 
 	@Id
@@ -23,7 +28,8 @@ public class Damage {
 	
 	@Column(name="damage_type")
 	private String damageType;
-	
+
+	@Column(name = "description")
 	private String description;
 	
 	@Column(name="repair_cost")
@@ -42,85 +48,5 @@ public class Damage {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="employee_id")
 	private Employee employee;
-
-	public Damage() {
-		super();
-	}
-
-	public Damage(String damageType, String description, float repairCost, LocalDateTime reportDate, LocalDate fixDate,
-			Vehicle vehicle, Employee employee) {
-		super();
-		this.damageType = damageType;
-		this.description = description;
-		this.repairCost = repairCost;
-		this.reportDate = reportDate;
-		this.fixDate = fixDate;
-		this.vehicle = vehicle;
-		this.employee = employee;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getDamageType() {
-		return damageType;
-	}
-
-	public void setDamageType(String damageType) {
-		this.damageType = damageType;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public float getRepairCost() {
-		return repairCost;
-	}
-
-	public void setRepairCost(float repairCost) {
-		this.repairCost = repairCost;
-	}
-
-	public LocalDateTime getReportDate() {
-		return reportDate;
-	}
-
-	public void setReportDate(LocalDateTime reportDate) {
-		this.reportDate = reportDate;
-	}
-
-	public LocalDate getFixDate() {
-		return fixDate;
-	}
-
-	public void setFixDate(LocalDate fixDate) {
-		this.fixDate = fixDate;
-	}
-
-	public Vehicle getVehicle() {
-		return vehicle;
-	}
-
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
-
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
 
 }

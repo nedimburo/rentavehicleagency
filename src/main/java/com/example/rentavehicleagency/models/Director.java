@@ -12,20 +12,24 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
+import lombok.*;
 
+@Getter
+@Setter
 @Entity
-@Table(name="directors", uniqueConstraints = {
-		@UniqueConstraint(columnNames="jmbg")
-})
+@Table(name="directors")
+@NoArgsConstructor
+@ToString(onlyExplicitlyIncluded = true, callSuper = true)
 public class Director {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@Column(name = "jmbg", unique = true)
 	private String jmbg;
-	
+
+	@Column(name = "pay")
 	private float pay;
 	
 	@Column(name="hire_date")
@@ -39,67 +43,4 @@ public class Director {
 	@JoinColumn(name="business_id")
 	private Business business;
 
-	public Director() {
-		super();
-	}
-
-	public Director(String jmbg, float pay, LocalDate hireDate, User user, Business business) {
-		super();
-		this.jmbg = jmbg;
-		this.pay = pay;
-		this.hireDate = hireDate;
-		this.user = user;
-		this.business = business;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getJmbg() {
-		return jmbg;
-	}
-
-	public void setJmbg(String jmbg) {
-		this.jmbg = jmbg;
-	}
-
-	public float getPay() {
-		return pay;
-	}
-
-	public void setPay(float pay) {
-		this.pay = pay;
-	}
-
-	public LocalDate getHireDate() {
-		return hireDate;
-	}
-
-	public void setHireDate(LocalDate hireDate) {
-		this.hireDate = hireDate;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Business getBusiness() {
-		return business;
-	}
-
-	public void setBusiness(Business business) {
-		this.business = business;
-	}
-
-	
-	
 }

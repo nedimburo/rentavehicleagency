@@ -40,9 +40,16 @@ public class EmployeeController {
 	
 	@PostMapping("/add-employee-submit")
 	public String submitEmployee(@ModelAttribute("employeeDto") EmployeeDto employeeDto) {
-		User user=new User(employeeDto.getFirstName(), employeeDto.getLastName(), employeeDto.getEmail(),
-				employeeDto.getPassword(), employeeDto.getNickname(), employeeDto.getRole(), employeeDto.getGender(),
-				employeeDto.getBirthDate(), "default_user_image.jpg");
+		User user=new User();
+		user.setFirstName(employeeDto.getFirstName());
+		user.setLastName(employeeDto.getLastName());
+		user.setEmail(employeeDto.getEmail());
+		user.setPassword(employeeDto.getPassword());
+		user.setNickname(employeeDto.getNickname());
+		user.setRole(employeeDto.getRole());
+		user.setGender(employeeDto.getGender());
+		user.setBirthDate(employeeDto.getBirthDate());
+		user.setProfileImage("default_user_image.jpg");
 		userService.saveUserInstance(user);
 		Business business=businessService.findBusinessByName(employeeDto.getName());
 		User newRegisteredUser=userService.getUserByEmail(employeeDto.getEmail());
@@ -69,9 +76,16 @@ public class EmployeeController {
 	
 	@PostMapping("/add-employee-hr-submit")
 	public String submitEmployeeHR(@ModelAttribute("employeeDto") EmployeeDto employeeDto) {
-		User user=new User(employeeDto.getFirstName(), employeeDto.getLastName(), employeeDto.getEmail(),
-				employeeDto.getPassword(), employeeDto.getNickname(), employeeDto.getRole(), employeeDto.getGender(),
-				employeeDto.getBirthDate(), "default_user_image.jpg");
+		User user=new User();
+		user.setFirstName(employeeDto.getFirstName());
+		user.setLastName(employeeDto.getLastName());
+		user.setEmail(employeeDto.getEmail());
+		user.setPassword(employeeDto.getPassword());
+		user.setNickname(employeeDto.getNickname());
+		user.setRole(employeeDto.getRole());
+		user.setGender(employeeDto.getGender());
+		user.setBirthDate(employeeDto.getBirthDate());
+		user.setProfileImage("default_user_image.jpg");
 		userService.saveUserInstance(user);
 		Business business=businessService.findBusinessByName(employeeDto.getName());
 		User newRegisteredUser=userService.getUserByEmail(employeeDto.getEmail());

@@ -40,10 +40,22 @@ public class VehicleController {
 	@PostMapping("/add-vehicle-submit")
 	public String submitVehicle(@ModelAttribute("vehicleDto") VehicleDto vehicleDto) {
 		Business business=businessService.findBusinessByName(vehicleDto.getBusinessName());
-		Vehicle vehicle=new Vehicle(vehicleDto.getBrand(), vehicleDto.getModelName(), vehicleDto.getModelYear(),
-				vehicleDto.getRegistrationPlate(), vehicleDto.getEngineDisplacement(), vehicleDto.getHorsepower(),
-				vehicleDto.getFuel(), vehicleDto.getTransmission(), vehicleDto.getColor(), vehicleDto.getType(),
-				vehicleDto.getBodyShape(), vehicleDto.getStatus(), vehicleDto.getPrice(), vehicleDto.getAddedDate(), business);
+		Vehicle vehicle=new Vehicle();
+		vehicle.setBrand(vehicleDto.getBrand());
+		vehicle.setModelName(vehicleDto.getModelName());
+		vehicle.setModelYear(vehicleDto.getModelYear());
+		vehicle.setRegistrationPlate(vehicleDto.getRegistrationPlate());
+		vehicle.setEngineDisplacement(vehicleDto.getEngineDisplacement());
+		vehicle.setHorsepower(vehicleDto.getHorsepower());
+		vehicle.setFuel(vehicleDto.getFuel());
+		vehicle.setTransmission(vehicleDto.getTransmission());
+		vehicle.setColor(vehicleDto.getColor());
+		vehicle.setType(vehicleDto.getType());
+		vehicle.setBodyShape(vehicleDto.getBodyShape());
+		vehicle.setStatus(vehicleDto.getStatus());
+		vehicle.setPrice(vehicleDto.getPrice());
+		vehicle.setAddedDate(vehicleDto.getAddedDate());
+		vehicle.setBusiness(business);
 		vehicleService.saveVehicle(vehicle);
 		Vehicle newVehicle=vehicleService.findVehicleByRegistrationPlate(vehicleDto.getRegistrationPlate());
 		imageVehicleService.saveListImageVehicle(vehicleDto.getImages(), newVehicle);

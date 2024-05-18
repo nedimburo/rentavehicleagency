@@ -39,9 +39,16 @@ public class DirectorController {
 	
 	@PostMapping("/add-director-submit")
 	public String submitDirector(@ModelAttribute("directorDto") DirectorDto directorDto) {
-		User user=new User(directorDto.getFirstName(), directorDto.getLastName(), directorDto.getEmail(), 
-				directorDto.getPassword(), directorDto.getNickname(), "DIRECTOR", directorDto.getGender(),
-				directorDto.getBirthDate(), "default_user_image.jpg");
+		User user=new User();
+		user.setFirstName(directorDto.getFirstName());
+		user.setLastName(directorDto.getLastName());
+		user.setEmail(directorDto.getEmail());
+		user.setPassword(directorDto.getPassword());
+		user.setNickname(directorDto.getNickname());
+		user.setRole("DIRECTOR");
+		user.setGender(directorDto.getGender());
+		user.setBirthDate(directorDto.getBirthDate());
+		user.setProfileImage("default_user_image.jpg");
 		userService.saveUserInstance(user);
 		Business business=businessService.findBusinessByName(directorDto.getName());
 		User newRegisteredUser=userService.getUserByEmail(directorDto.getEmail());

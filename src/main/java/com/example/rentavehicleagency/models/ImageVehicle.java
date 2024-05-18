@@ -10,9 +10,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.*;
 
+@Getter
+@Setter
 @Entity
 @Table(name="vehicle_images")
+@NoArgsConstructor
+@ToString(onlyExplicitlyIncluded = true, callSuper = true)
 public class ImageVehicle {
 	
 	@Id
@@ -27,39 +32,4 @@ public class ImageVehicle {
 	@JoinColumn(name="vehicle_id")
 	private Vehicle vehicle;
 
-	public ImageVehicle() {
-		super();
-	}
-
-	public ImageVehicle(Long id, String imageName, Vehicle vehicle) {
-		super();
-		this.id = id;
-		this.imageName = imageName;
-		this.vehicle = vehicle;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getImageName() {
-		return imageName;
-	}
-
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
-
-	public Vehicle getVehicle() {
-		return vehicle;
-	}
-
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
-	
 }
