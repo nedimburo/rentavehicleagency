@@ -2,6 +2,7 @@ package com.example.rentavehicleagency.models;
 
 import java.time.LocalDateTime;
 
+import com.example.rentavehicleagency.clients.entities.ClientEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -47,7 +48,7 @@ public class Request {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="client_id")
-	private Client client;
+	private ClientEntity clientEntity;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="vehicle_id")

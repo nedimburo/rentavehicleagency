@@ -62,7 +62,7 @@ public class RequestService {
 				long daysDifference=calculateDaysDifference(allRequests.get(i).getStartTime(), allRequests.get(i).getEndTime());
 				float requestProfit=daysDifference*allRequests.get(i).getVehicle().getPrice();
 				requestDto.setRequestProfit(requestProfit);
-				requestDto.setClientFullName(allRequests.get(i).getClient().getUser().getFirstName() + " " + allRequests.get(i).getClient().getUser().getLastName());
+				requestDto.setClientFullName(allRequests.get(i).getClientEntity().getUserEntity().getFirstName() + " " + allRequests.get(i).getClientEntity().getUserEntity().getLastName());
 				requestDto.setVehicleBrandModel(allRequests.get(i).getVehicle().getBrand() + " " + allRequests.get(i).getVehicle().getModelName());
 				requestsForDisplay.add(requestDto);
 			}

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.rentavehicleagency.dto.VehicleDto;
-import com.example.rentavehicleagency.models.Business;
+import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
 import com.example.rentavehicleagency.models.Vehicle;
-import com.example.rentavehicleagency.services.BusinessService;
+import com.example.rentavehicleagency.businesses.services.BusinessService;
 import com.example.rentavehicleagency.services.ImageVehicleService;
 import com.example.rentavehicleagency.services.VehicleService;
 
@@ -31,15 +31,15 @@ public class VehicleController {
 	
 	@GetMapping("/add-vehicle")
 	public String addVehiclePage(Model model) {
-		List<Business> allBusinesses=businessService.getAllBusinesses();
+		List<BusinessEntity> allBusinessEntities =businessService.getAllBusinesses();
 		model.addAttribute("vehicleDto", new VehicleDto());
-		model.addAttribute("allBusinesses", allBusinesses);
+		model.addAttribute("allBusinesses", allBusinessEntities);
 		return "addVehicle";
 	}
 	
 	@PostMapping("/add-vehicle-submit")
 	public String submitVehicle(@ModelAttribute("vehicleDto") VehicleDto vehicleDto) {
-		Business business=businessService.findBusinessByName(vehicleDto.getBusinessName());
+		BusinessEntity businessEntity =businessService.findBusinessByName(vehicleDto.getBusinessName());
 		Vehicle vehicle=new Vehicle();
 		vehicle.setBrand(vehicleDto.getBrand());
 		vehicle.setModelName(vehicleDto.getModelName());
@@ -55,7 +55,7 @@ public class VehicleController {
 		vehicle.setStatus(vehicleDto.getStatus());
 		vehicle.setPrice(vehicleDto.getPrice());
 		vehicle.setAddedDate(vehicleDto.getAddedDate());
-		vehicle.setBusiness(business);
+		vehicle.setBusinessEntity(businessEntity);
 		vehicleService.saveVehicle(vehicle);
 		Vehicle newVehicle=vehicleService.findVehicleByRegistrationPlate(vehicleDto.getRegistrationPlate());
 		imageVehicleService.saveListImageVehicle(vehicleDto.getImages(), newVehicle);

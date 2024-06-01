@@ -14,24 +14,24 @@
 <body>
 	<div class="simple-container">
 		<h1 class="simple-header">User Profile</h1>
-		<a th:href="@{/user-page}" class="redirect-button">Return</a>
+		<a th:href="@{/userEntity-page}" class="redirect-button">Return</a>
 		<p class="simple-message">If your new profile picture is not appearing, refresh the site or come back later.</p>
-	    <div th:if="${user}">
+	    <div th:if="${userEntity}">
 			<div class="profile-image-container">
-	        	<img th:if="${user.getProfileImage() != null}" th:src="'/user_images/'+${user.getProfileImage()}" alt="Profile Image" class="scale-image">
+	        	<img th:if="${userEntity.getProfileImage() != null}" th:src="'/user_images/'+${userEntity.getProfileImage()}" alt="Profile Image" class="scale-image">
 	        </div>
-	        <div class="profile-user-info-container">
-				<p th:text="${user.getNickname()}"></p>
-		        <p>First Name: <span th:text="${user.getFirstName()}"></span></p>
-		        <p>Last Name: <span th:text="${user.getLastName()}"></span></p>
-		        <p>Email: <span th:text="${user.getEmail()}"></span></p>
-		        <p>Gender: <span th:text="${user.getGender()}"></span></p>
-		        <p>Birth Date: <span th:text="${user.getBirthDate()}"></span></p>
+	        <div class="profile-userEntity-info-container">
+				<p th:text="${userEntity.getNickname()}"></p>
+		        <p>First Name: <span th:text="${userEntity.getFirstName()}"></span></p>
+		        <p>Last Name: <span th:text="${userEntity.getLastName()}"></span></p>
+		        <p>Email: <span th:text="${userEntity.getEmail()}"></span></p>
+		        <p>Gender: <span th:text="${userEntity.getGender()}"></span></p>
+		        <p>Birth Date: <span th:text="${userEntity.getBirthDate()}"></span></p>
 	        </div>
 	    </div>
 	    <button id="showFormButton" class="form-button">Change Profile Image</button>
 	    <div id="profileImageForm">
-		    <form th:action="@{/profile/{id}/submit-image(id=${user.id})}" method="post" enctype="multipart/form-data">
+		    <form th:action="@{/profile/{id}/submit-image(id=${userEntity.id})}" method="post" enctype="multipart/form-data">
 				<label for="profileImage">Profile image:</label>
 				<input type="file" name="image" id="profileImage" accept=".jpg, .png">
 				<br/>
@@ -40,8 +40,8 @@
 			</form>
 			<button id="hideFormButton" class="form-button red-button-bg">Cancel</button>
 		</div>
-		<a th:if="${client.getIsConfirmed()==0}" th:href="@{/profile/{id}/add-information(id=${user.id})}" class="redirect-button">Add information</a>
-		<a th:if="${client.getIsConfirmed()==1}" th:href="@{/profile/{id}/add-information(id=${user.id})}" class="redirect-button">Edit information</a>
+		<a th:if="${clientEntity.getIsConfirmed()==0}" th:href="@{/profile/{id}/add-information(id=${userEntity.id})}" class="redirect-button">Add information</a>
+		<a th:if="${clientEntity.getIsConfirmed()==1}" th:href="@{/profile/{id}/add-information(id=${userEntity.id})}" class="redirect-button">Edit information</a>
 	</div>
 </body>
 </html>

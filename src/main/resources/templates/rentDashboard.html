@@ -23,9 +23,9 @@
 	<div class="section-container">
 		<div th:each="request : ${allRequests}" th:if="${request.getStatus()}=='PENDING'" class="request-info-container">
 			<div>
-				<p class="section-text">Name: <span th:text="${request.getClient().getUser().getFirstName() + ' ' + request.getClient().getUser().getLastName()}"></span></p>
-				<p class="section-text">Nickname: <span th:text="${request.getClient().getUser().getNickname()}"></span></p>
-				<p class="section-text">E-mail: <span th:text="${request.getClient().getUser().getEmail()}"></span></p>
+				<p class="section-text">Name: <span th:text="${request.getClientEntity().getUserEntity().getFirstName() + ' ' + request.getClientEntity().getUserEntity().getLastName()}"></span></p>
+				<p class="section-text">Nickname: <span th:text="${request.getClientEntity().getUserEntity().getNickname()}"></span></p>
+				<p class="section-text">E-mail: <span th:text="${request.getClientEntity().getUserEntity().getEmail()}"></span></p>
 			</div>
 			<div>
 				<p class="section-text">Vehicle: <span th:text="${request.getVehicle().getBrand() + ' ' + request.getVehicle().getModelName()}"></span></pclass="section-text">
@@ -43,9 +43,9 @@
 	<div class="section-container">
 		<div th:each="request : ${allRequests}" th:if="${request.getStatus()}=='ONGOING'" class="request-info-container">
 			<div>
-				<p class="section-text">Name: <span th:text="${request.getClient().getUser().getFirstName() + ' ' + request.getClient().getUser().getLastName()}"></span></p>
-				<p class="section-text">Nickname: <span th:text="${request.getClient().getUser().getNickname()}"></span></p>
-				<p class="section-text">E-mail: <span th:text="${request.getClient().getUser().getEmail()}"></span></p>
+				<p class="section-text">Name: <span th:text="${request.getClientEntity().getUserEntity().getFirstName() + ' ' + request.getClientEntity().getUserEntity().getLastName()}"></span></p>
+				<p class="section-text">Nickname: <span th:text="${request.getClientEntity().getUserEntity().getNickname()}"></span></p>
+				<p class="section-text">E-mail: <span th:text="${request.getClientEntity().getUserEntity().getEmail()}"></span></p>
 			</div>
 			<div>
 				<p class="section-text">Vehicle: <span th:text="${request.getVehicle().getBrand() + ' ' + request.getVehicle().getModelName()}"></span></pclass="section-text">

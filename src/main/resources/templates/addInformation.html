@@ -12,8 +12,8 @@
 <body>
 	<div class="simple-container">
 		<h1 class="simple-header">Add Information</h1>
-		<a th:href="@{/profile/{id}(id=${client.getUser().getId()})}" class="redirect-button">Return</a>
-		<form th:action="@{/profile/{id}/submit-information(id=${client.getUser().getId()})}" method="post" th:object="${client}">
+		<a th:href="@{/profile/{id}(id=${clientEntity.getUserEntity().getId()})}" class="redirect-button">Return</a>
+		<form th:action="@{/profile/{id}/submit-information(id=${clientEntity.getUserEntity().getId()})}" method="post" th:object="${clientEntity}">
 			<label for="address">Address:</label>
 			<input th:field="*{address}" type="text" id="address" name="address" placeholder="Enter your address" required>
 			<br/>

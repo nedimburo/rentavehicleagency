@@ -2,6 +2,7 @@ package com.example.rentavehicleagency.models;
 
 import java.time.LocalDate;
 
+import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -61,6 +62,6 @@ public class Vehicle {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="business_id")
-	private Business business;
+	private BusinessEntity businessEntity;
 
 }

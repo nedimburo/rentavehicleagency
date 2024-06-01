@@ -12,7 +12,7 @@
 <body>
 	<div class="simple-container">
 		<h1 class="simple-header">Users Request History</h1>
-		<a th:href="@{/user-page}" class="redirect-button">Return</a>
+		<a th:href="@{/userEntity-page}" class="redirect-button">Return</a>
 		<h2 class="simple-header-requests">Pending Rent Requests</h2>
 		<div th:each="request : ${clientsRequests}">
 			<div th:if="${request.getStatus()=='PENDING'}" class="requests-info-container">

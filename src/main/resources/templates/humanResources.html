@@ -20,13 +20,13 @@
 	</div>
 	
 	<div class="section-header-container">
-		<h2 class="section-header">List of Employees that work in "<span th:text="${business.getName()}"></span>" business:</h2>
+		<h2 class="section-header">List of Employees that work in "<span th:text="${businessEntity.getName()}"></span>" businessEntity:</h2>
 	</div>
 	
 	<div class="section-container">
-		<div th:each="employee : ${businessEmployees}" th:if="${user.getEmail()}!=${employee.getUser().getEmail()}" class="employee-info-container">
-			<p class="section-text">Name: <span th:text="${employee.getUser().getFirstName() + ' ' + employee.getUser().getLastName() + ' (' + employee.getUser().getEmail() + ')'}"></span></p>
-			<p class="section-text"><span th:text="${employee.getUser().getGender() + ' (' + employee.getUser().getBirthDate() + ')'}"></span></p>
+		<div th:each="employee : ${businessEmployees}" th:if="${userEntity.getEmail()}!=${employee.getUserEntity().getEmail()}" class="employee-info-container">
+			<p class="section-text">Name: <span th:text="${employee.getUserEntity().getFirstName() + ' ' + employee.getUserEntity().getLastName() + ' (' + employee.getUserEntity().getEmail() + ')'}"></span></p>
+			<p class="section-text"><span th:text="${employee.getUserEntity().getGender() + ' (' + employee.getUserEntity().getBirthDate() + ')'}"></span></p>
 			<p class="section-text">JMBG: <span th:text="${employee.getJmbg()}"></span></p>
 			<p class="section-text">Address: <span th:text="${employee.getAddress() + ' (' + employee.getCity() + ')'}"></span></p>
 			<p class="section-text">Contact Number: <span th:text="${employee.getContactNumber()}"></span></p>

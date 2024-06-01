@@ -19,8 +19,8 @@
 	
 	<div class="side-menu">
 		<span id="closeButton">&times;</span>
-		<a th:href="@{/profile/{id}(id=${user.id})}">View Profile</a>
-		<a th:href="@{/user-requests}">View Requests</a>
+		<a th:href="@{/profile/{id}(id=${userEntity.id})}">View Profile</a>
+		<a th:href="@{/userEntity-requests}">View Requests</a>
 		<span sec:authorize="isAuthenticated"><a th:href="@{/logout}">Logout</a></span>
 	</div>
 	

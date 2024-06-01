@@ -16,8 +16,8 @@
 		<div class="form-vehicle-image-container">
 			<img th:if="${vehicleImage.getImageName() != null}" th:src="'/vehicle_images/'+${vehicleImage.getImageName()}" alt="Vehicle Image" class="scale-image">
 		</div>
-		<h2 class="smaller-simple-header">Add damage details</h2>
-		<form th:action="@{/report-damage/{vehicleId}/submit(vehicleId=${vehicle.getId()})}" th:object="${damage}" method="post">
+		<h2 class="smaller-simple-header">Add damageEntity details</h2>
+		<form th:action="@{/report-damageEntity/{vehicleId}/submit(vehicleId=${vehicle.getId()})}" th:object="${damageEntity}" method="post">
 			<label>Damage Type:</label>
 			<select id="damageType" th:field="*{damageType}">
 					<option th:value="ENGINE" th:text="Engine" selected></option>
@@ -30,10 +30,10 @@
 			<br/>
 			<label for="description">Description:</label>
 			<br/>
-			<textarea th:field="*{description}" id="description" name="description" placeholder="Enter damage description" rows="10" cols="80" required></textarea>
+			<textarea th:field="*{description}" id="description" name="description" placeholder="Enter damageEntity description" rows="10" cols="80" required></textarea>
 			<br/>
 			<label for="repairCost">Repair Cost:</label>
-			<input th:field="*{repairCost}" type="number" id="repairCost" name="repairCost" placeholder="Enter damage repair cost" step="0.01" required>
+			<input th:field="*{repairCost}" type="number" id="repairCost" name="repairCost" placeholder="Enter damageEntity repair cost" step="0.01" required>
 			<br/>
 			<input type="submit" value="Add Damage" class="form-button">
 		</form>

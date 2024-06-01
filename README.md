@@ -9,11 +9,11 @@ All of the application data is stored in local MySQL database.<br />
 The application can also be used by the employees of the agency.<br />
 **Types of employees:**
 1. **Human Resources - hiring new employees**
-1. **Finance - overview of business finances**
-1. **Rent - handling user requests**
+1. **Finance - overview of businessEntity finances**
+1. **Rent - handling userEntity requests**
 1. **Maintenance - handling vehicle maintenance**<br />
 <!-- -->
-Users of this applicaton can also be the agency **owner** and the business **directors**.<br />
+Users of this applicaton can also be the agency **owner** and the businessEntity **directors**.<br />
 Basic users can register and login to the main website from which they can choose on of the available vehicles and make a request for rent.<br />
 ## Task List
 - [ ] Website Design Overhaul

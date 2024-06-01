@@ -14,8 +14,8 @@
 <body>
 	<div class="simple-container">
 		<h1 class="simple-header">Selected Vehicle</h1>
-		<a th:href="@{/user-page}" class="redirect-button">Return</a>
-		<div th:if="${client.getIsConfirmed}==0" class="simple-message">
+		<a th:href="@{/userEntity-page}" class="redirect-button">Return</a>
+		<div th:if="${clientEntity.getIsConfirmed}==0" class="simple-message">
 			Your profile is not confirmed and you cannot make rent requests. <br/>Please go to profile page and add additional information first.
 		</div>
 		<div th:each="vehicleImage : ${vehicleImages}" class="slide-vehicle-image-container forSlide">
@@ -34,7 +34,7 @@
 			<p>Price: <span th:text="${vehicle.getPrice() + ' $'}"></span></p>
 		</div>			
 		<form th:action="@{/selected-vehicle/{vehicleId}/create-request(vehicleId=${vehicle.getId()})}" th:object="${request}" method="post"
-		th:if="${vehicle.getStatus()}=='AVAILABLE' and ${client.getIsConfirmed}==1">
+		th:if="${vehicle.getStatus()}=='AVAILABLE' and ${clientEntity.getIsConfirmed}==1">
 			<label for="startTime">Choose Start Date and time:</label>
 			<input th:field="*{startTime}" name="startTime" id="startTime" type="datetime-local" required>
 			<br/>

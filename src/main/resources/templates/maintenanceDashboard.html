@@ -19,7 +19,7 @@
 	</div>
 	
 	<div class="section-header-container">
-		<h2 class="section-header">List of vehicles that belong to "<span th:text="${business.getName()}"></span>" business:</h2>
+		<h2 class="section-header">List of vehicles that belong to "<span th:text="${businessEntity.getName()}"></span>" businessEntity:</h2>
 	</div>
 	<div class="section-container">
 		<div th:each="vehicle : ${allVehiclesWithImages}" th:if="${vehicle.getStatus()}=='AVAILABLE'" class="maintenance-vehicle-container">
@@ -29,7 +29,7 @@
 			<p class="offer-text">Name: <span th:text="${vehicle.getBrand() + ' ' + vehicle.getModelName()}"></span></p>
 			<p class="offer-text">Model Year: <span th:text="${vehicle.getModelYear()}"></span></p>
 			<p class="offer-text">Status: <span th:text="${vehicle.getStatus()}"></span></p>
-			<a th:href="@{/report-damage/{vehicleId}(vehicleId=${vehicle.getId()})}" class="form-button-extended red-button-bg">Report Damage</a>
+			<a th:href="@{/report-damageEntity/{vehicleId}(vehicleId=${vehicle.getId()})}" class="form-button-extended red-button-bg">Report Damage</a>
 		</div>
 	</div>
 	

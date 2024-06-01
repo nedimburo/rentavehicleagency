@@ -65,9 +65,9 @@
 				<option th:value="MAINTEMPLOYEE" th:text="Maintenance"></option>
 			</select>
 			<br/>
-			<label>Select in which business the employee will work:</label>
+			<label>Select in which businessEntity the employee will work:</label>
 			<select th:field="*{name}">
-				<option th:each="business : ${allBusinesses}" th:value="${business.name}" th:text="${business.name}"></option>
+				<option th:each="businessEntity : ${allBusinessEntities}" th:value="${businessEntity.name}" th:text="${businessEntity.name}"></option>
 			</select>
 			<br/>
 			<input type="submit" value="Add Employee" class="form-button">

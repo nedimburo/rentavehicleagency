@@ -11,8 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.example.rentavehicleagency.services.CustomSuccessHandler;
-import com.example.rentavehicleagency.services.CustomUserDetailsService;
+import com.example.rentavehicleagency.configuration.service.CustomSuccessHandler;
+import com.example.rentavehicleagency.configuration.service.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity

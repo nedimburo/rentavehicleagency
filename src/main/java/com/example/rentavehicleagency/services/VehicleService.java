@@ -4,11 +4,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.rentavehicleagency.damages.services.DamageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.rentavehicleagency.dto.VehicleDisplayDto;
-import com.example.rentavehicleagency.models.Damage;
+import com.example.rentavehicleagency.damages.entities.DamageEntity;
 import com.example.rentavehicleagency.models.ImageVehicle;
 import com.example.rentavehicleagency.models.Request;
 import com.example.rentavehicleagency.models.Vehicle;
@@ -86,7 +87,7 @@ public class VehicleService {
 	
 	public void removeVehicle(Long id) {
 		Vehicle vehicle=vehicleRepository.findById(id).orElse(null);
-		List<Damage> damagesVehicle=damageService.getDamagesByVehicleId(vehicle.getId());
+		List<DamageEntity> damagesVehicle=damageService.getDamagesByVehicleId(vehicle.getId());
 		List<ImageVehicle> imagesVehicle=imageVehicleService.getVehicleImages(vehicle.getId());
 		List<Request> requestsVehicle=requestService.findRequestsByVehicleId(vehicle.getId());
 		for (int i=0; i<damagesVehicle.size(); i++) {

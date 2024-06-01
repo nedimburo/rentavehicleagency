@@ -20,9 +20,9 @@
 			<div>
 				<p>Client name: <span th:text="${clientUser.getFirstName() + ' ' + clientUser.getLastName()}"></span></p>
 				<p>Email: <span th:text="${clientUser.getEmail()}"></span></p>
-				<p>JMBG: <span th:text="${client.getJmbg()}"></span></p>
-				<p>Bank Information: <span th:text="${client.getBankInformation()}"></span></p>
-				<p>License number: <span th:text="${client.getLicenseNumber()}"></span></p>
+				<p>JMBG: <span th:text="${clientEntity.getJmbg()}"></span></p>
+				<p>Bank Information: <span th:text="${clientEntity.getBankInformation()}"></span></p>
+				<p>License number: <span th:text="${clientEntity.getLicenseNumber()}"></span></p>
 			</div>
 			<div>
 				<p>Vehicle name: <span th:text="${vehicle.getBrand() + ' ' + vehicle.getModelName()}"></span></p>
