@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add vehicle</title>
+    <title>Add vehicleEntity</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
 	<div class="simple-container">
 		<h1 class="simple-header">Add Vehicle</h1>
 		<a th:href="@{/owner-page}" class="redirect-button">Return</a>
-		<form th:action="@{/add-vehicle-submit}" th:object="${vehicleDto}" method="post" enctype="multipart/form-data">
+		<form th:action="@{/add-vehicleEntity-submit}" th:object="${vehicleDto}" method="post" enctype="multipart/form-data">
 			<label for="brand">Brand:</label>
 			<input th:field="*{brand}" name="brand" id="brand" type="text" required>
 			<br/>
@@ -69,12 +69,12 @@
 			<label for="price">Price:</label>
 			<input th:field="*{price}" name="price" id="price" type="number" step="0.01" required>
 			<br/>
-			<label>Select to which businessEntity the vehicle belongs:</label>
+			<label>Select to which businessEntity the vehicleEntity belongs:</label>
 			<select th:field="*{businessName}">
 				<option th:each="businessEntity : ${allBusinessEntities}" th:value="${businessEntity.name}" th:text="${businessEntity.name}"></option>
 			</select>
 			<br/>
-			<label for="images">Upload multiple vehicle images: </label>
+			<label for="images">Upload multiple vehicleEntity images: </label>
 			<input th:field="*{images}" name="images" id="images" type="file" multiple="multiple" accept=".jpg, .png" required>
 			<br/>
 			<input type="submit" value="Add Vehicle" class="form-button">

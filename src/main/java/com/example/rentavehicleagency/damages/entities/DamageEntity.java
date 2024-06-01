@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.example.rentavehicleagency.damages.Damage;
-import com.example.rentavehicleagency.models.Employee;
-import com.example.rentavehicleagency.models.Vehicle;
+import com.example.rentavehicleagency.employees.entities.EmployeeEntity;
+import com.example.rentavehicleagency.vehicles.entities.VehicleEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -46,10 +46,10 @@ public class DamageEntity implements Damage {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="vehicle_id")
-	private Vehicle vehicle;
+	private VehicleEntity vehicleEntity;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="employee_id")
-	private Employee employee;
+	private EmployeeEntity employeeEntity;
 
 }

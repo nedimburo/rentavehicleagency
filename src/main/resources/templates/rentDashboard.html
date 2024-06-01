@@ -13,7 +13,7 @@
 	<div class="header-container">
 		<h1 class="header-title">Rent Dashboard</h1>
 		<div>
-			<a th:href="@{/add-report}" class="header-button">Create Report</a>
+			<a th:href="@{/add-reportEntity}" class="header-button">Create Report</a>
 			<span sec:authorize="isAuthenticated"><a th:href="@{/logout}" class="header-button">Logout</a></span>
 		</div>
 	</div>
@@ -21,18 +21,18 @@
 		<h2 class="section-header">Pending Rent Requests:</h2>
 	</div>
 	<div class="section-container">
-		<div th:each="request : ${allRequests}" th:if="${request.getStatus()}=='PENDING'" class="request-info-container">
+		<div th:each="requestEntity : ${allRequestEntities}" th:if="${requestEntity.getStatus()}=='PENDING'" class="requestEntity-info-container">
 			<div>
-				<p class="section-text">Name: <span th:text="${request.getClientEntity().getUserEntity().getFirstName() + ' ' + request.getClientEntity().getUserEntity().getLastName()}"></span></p>
-				<p class="section-text">Nickname: <span th:text="${request.getClientEntity().getUserEntity().getNickname()}"></span></p>
-				<p class="section-text">E-mail: <span th:text="${request.getClientEntity().getUserEntity().getEmail()}"></span></p>
+				<p class="section-text">Name: <span th:text="${requestEntity.getClientEntity().getUserEntity().getFirstName() + ' ' + requestEntity.getClientEntity().getUserEntity().getLastName()}"></span></p>
+				<p class="section-text">Nickname: <span th:text="${requestEntity.getClientEntity().getUserEntity().getNickname()}"></span></p>
+				<p class="section-text">E-mail: <span th:text="${requestEntity.getClientEntity().getUserEntity().getEmail()}"></span></p>
 			</div>
 			<div>
-				<p class="section-text">Vehicle: <span th:text="${request.getVehicle().getBrand() + ' ' + request.getVehicle().getModelName()}"></span></pclass="section-text">
-				<p class="section-text">Model Year: <span th:text="${request.getVehicle().getModelYear()}"></span></p>
-				<p class="section-text">Price: <span th:text="${request.getVehicle().getPrice()}"></span>$</p>
+				<p class="section-text">Vehicle: <span th:text="${requestEntity.getVehicleEntity().getBrand() + ' ' + requestEntity.getVehicleEntity().getModelName()}"></span></pclass="section-text">
+				<p class="section-text">Model Year: <span th:text="${requestEntity.getVehicleEntity().getModelYear()}"></span></p>
+				<p class="section-text">Price: <span th:text="${requestEntity.getVehicleEntity().getPrice()}"></span>$</p>
 			</div>
-			<a th:href="@{/handle-request/{id}(id=${request.getId()})}" class="form-button-extended rent-button">Handle Request</a>
+			<a th:href="@{/handle-requestEntity/{id}(id=${requestEntity.getId()})}" class="form-button-extended rent-button">Handle Request</a>
 		</div>
 	</div>
 	</div>
@@ -41,18 +41,18 @@
 		<h2 class="section-header">Record Vehicle Return:</h2>
 	</div>
 	<div class="section-container">
-		<div th:each="request : ${allRequests}" th:if="${request.getStatus()}=='ONGOING'" class="request-info-container">
+		<div th:each="requestEntity : ${allRequestEntities}" th:if="${requestEntity.getStatus()}=='ONGOING'" class="requestEntity-info-container">
 			<div>
-				<p class="section-text">Name: <span th:text="${request.getClientEntity().getUserEntity().getFirstName() + ' ' + request.getClientEntity().getUserEntity().getLastName()}"></span></p>
-				<p class="section-text">Nickname: <span th:text="${request.getClientEntity().getUserEntity().getNickname()}"></span></p>
-				<p class="section-text">E-mail: <span th:text="${request.getClientEntity().getUserEntity().getEmail()}"></span></p>
+				<p class="section-text">Name: <span th:text="${requestEntity.getClientEntity().getUserEntity().getFirstName() + ' ' + requestEntity.getClientEntity().getUserEntity().getLastName()}"></span></p>
+				<p class="section-text">Nickname: <span th:text="${requestEntity.getClientEntity().getUserEntity().getNickname()}"></span></p>
+				<p class="section-text">E-mail: <span th:text="${requestEntity.getClientEntity().getUserEntity().getEmail()}"></span></p>
 			</div>
 			<div>
-				<p class="section-text">Vehicle: <span th:text="${request.getVehicle().getBrand() + ' ' + request.getVehicle().getModelName()}"></span></pclass="section-text">
-				<p class="section-text">Model Year: <span th:text="${request.getVehicle().getModelYear()}"></span></p>
-				<p class="section-text">Price: <span th:text="${request.getVehicle().getPrice()}"></span>$</p>
+				<p class="section-text">Vehicle: <span th:text="${requestEntity.getVehicleEntity().getBrand() + ' ' + requestEntity.getVehicleEntity().getModelName()}"></span></pclass="section-text">
+				<p class="section-text">Model Year: <span th:text="${requestEntity.getVehicleEntity().getModelYear()}"></span></p>
+				<p class="section-text">Price: <span th:text="${requestEntity.getVehicleEntity().getPrice()}"></span>$</p>
 			</div>
-			<a th:href="@{/return-vehicle/{id}(id=${request.getId()})}" class="form-button-extended rent-button green-button-bg">Record Return</a>
+			<a th:href="@{/return-vehicleEntity/{id}(id=${requestEntity.getId()})}" class="form-button-extended rent-button green-button-bg">Record Return</a>
 		</div>
 	</div>
 </body>

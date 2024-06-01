@@ -13,7 +13,7 @@
 	<div class="header-container">
 		<h1 class="header-title">Finance Page</h1>
 		<div>
-			<a th:href="@{/add-report}" class="header-button">Create Report</a>
+			<a th:href="@{/add-reportEntity}" class="header-button">Create Report</a>
 			<span sec:authorize="isAuthenticated"><a th:href="@{/logout}" class="header-button">Logout</a></span>
 		</div>
 	</div>
@@ -37,17 +37,17 @@
 		<h2 class="section-header">Finished Rents in: "<span th:text="${businessEntity.getName()}"></span>" businessEntity:</h2>
 	</div>
 	<div class="section-container">
-		<div th:each="request : ${allRequests}" class="finance-request-container">
+		<div th:each="requestEntity : ${allRequestEntities}" class="finance-requestEntity-container">
 			<div class="finance-image-container">
 				<img src="/images/reporticon.png" alt="Request Icon" class="scale-image">
 			</div>
-			<p class="section-text">Request ID: <span th:text="${request.getId()}"></span></p>
-			<p class="section-text">Creation Date: <span th:text="${request.getCreationDate()}"></span></p>
-			<p class="section-text">Start Time: <span th:text="${request.getStartTime()}"></span></p>
-			<p class="section-text">End Time: <span th:text="${request.getEndTime()}"></span></p>
-			<p class="section-text">Payment: <span th:text="${request.getPaymentMethod() + ' (' + request.getRequestProfit() + ' $) '}"></span></p>
-			<p class="section-text">Client Name: <span th:text="${request.getClientFullName()}"></span></p>
-			<p class="section-text">Vehicle: <span th:text="${request.getVehicleBrandModel()}"></span></p>
+			<p class="section-text">Request ID: <span th:text="${requestEntity.getId()}"></span></p>
+			<p class="section-text">Creation Date: <span th:text="${requestEntity.getCreationDate()}"></span></p>
+			<p class="section-text">Start Time: <span th:text="${requestEntity.getStartTime()}"></span></p>
+			<p class="section-text">End Time: <span th:text="${requestEntity.getEndTime()}"></span></p>
+			<p class="section-text">Payment: <span th:text="${requestEntity.getPaymentMethod() + ' (' + requestEntity.getRequestProfit() + ' $) '}"></span></p>
+			<p class="section-text">Client Name: <span th:text="${requestEntity.getClientFullName()}"></span></p>
+			<p class="section-text">Vehicle: <span th:text="${requestEntity.getVehicleBrandModel()}"></span></p>
 		</div>
 	</div>
 	

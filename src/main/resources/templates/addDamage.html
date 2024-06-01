@@ -13,11 +13,11 @@
 	<div class="simple-container">
 		<h1 class="simple-header">Add Damage</h1>
 		<a th:href="@{/maintenance-dashboard-page}" class="redirect-button">Return</a>
-		<div class="form-vehicle-image-container">
+		<div class="form-vehicleEntity-image-container">
 			<img th:if="${vehicleImage.getImageName() != null}" th:src="'/vehicle_images/'+${vehicleImage.getImageName()}" alt="Vehicle Image" class="scale-image">
 		</div>
 		<h2 class="smaller-simple-header">Add damageEntity details</h2>
-		<form th:action="@{/report-damageEntity/{vehicleId}/submit(vehicleId=${vehicle.getId()})}" th:object="${damageEntity}" method="post">
+		<form th:action="@{/reportEntity-damageEntity/{vehicleId}/submit(vehicleId=${vehicleEntity.getId()})}" th:object="${damageEntity}" method="post">
 			<label>Damage Type:</label>
 			<select id="damageType" th:field="*{damageType}">
 					<option th:value="ENGINE" th:text="Engine" selected></option>

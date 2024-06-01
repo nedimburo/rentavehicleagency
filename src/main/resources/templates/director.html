@@ -36,15 +36,15 @@
 		<h2 class="section-header">All vehicles that belong to: "<span th:text="${businessEntity.getName()}"></span>" businessEntity:</h2>
 	</div>
 	
-	<div class="vehicle-list-container">
-		<div th:each="vehicle : ${allVehiclesWithImages}" class="vehicle-info-container">
-			<div class="vehicle-image-container">
-				<img th:if="${vehicle.getImageName() != null}" th:src="'/vehicle_images/'+${vehicle.getImageName()}" alt="Vehicle Image" class="scale-image">
+	<div class="vehicleEntity-list-container">
+		<div th:each="vehicleEntity : ${allVehiclesWithImages}" class="vehicleEntity-info-container">
+			<div class="vehicleEntity-image-container">
+				<img th:if="${vehicleEntity.getImageName() != null}" th:src="'/vehicle_images/'+${vehicleEntity.getImageName()}" alt="Vehicle Image" class="scale-image">
 			</div>
-			<p class="vehicle-info-text">Name: <span th:text="${vehicle.getBrand() + ' ' + vehicle.getModelName()}"></span></p>
-			<p class="vehicle-info-text">Year: <span th:text="${vehicle.getModelYear()}"></span></p>
-			<p class="vehicle-info-text">Price: <span th:text="${vehicle.getPrice()}"></span></p>
-			<p class="vehicle-info-text">Status: <span th:text="${vehicle.getStatus()}"></span></p>
+			<p class="vehicleEntity-info-text">Name: <span th:text="${vehicleEntity.getBrand() + ' ' + vehicleEntity.getModelName()}"></span></p>
+			<p class="vehicleEntity-info-text">Year: <span th:text="${vehicleEntity.getModelYear()}"></span></p>
+			<p class="vehicleEntity-info-text">Price: <span th:text="${vehicleEntity.getPrice()}"></span></p>
+			<p class="vehicleEntity-info-text">Status: <span th:text="${vehicleEntity.getStatus()}"></span></p>
 		</div>
 	</div>
 	

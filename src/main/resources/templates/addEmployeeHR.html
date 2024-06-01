@@ -13,7 +13,7 @@
 	<div class="simple-container">
 		<h1 class="simple-header">Add Employee</h1>
 		<a th:href="@{/hr-page}" class="redirect-button">Return</a>
-		<form th:action="@{/add-employee-hr-submit}" method="post" th:object="${employeeDto}">
+		<form th:action="@{/add-employeeEntity-hr-submit}" method="post" th:object="${employeeDto}">
 			<label for="firstName">First Name:</label>
 	        <input th:field="*{firstName}" type="text" id="firstName" name="firstName" placeholder="Enter employees first name" required>
 			<br/>
@@ -65,7 +65,7 @@
 				<option th:value="MAINTEMPLOYEE" th:text="Maintenance"></option>
 			</select>
 			<br/>
-			<label>Select in which businessEntity the employee will work:</label>
+			<label>Select in which businessEntity the employeeEntity will work:</label>
 			<select th:field="*{name}">
 				<option th:each="businessEntity : ${allBusinessEntities}" th:value="${businessEntity.name}" th:text="${businessEntity.name}"></option>
 			</select>

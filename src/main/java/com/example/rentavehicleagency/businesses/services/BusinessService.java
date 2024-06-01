@@ -9,7 +9,7 @@ import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.rentavehicleagency.models.Request;
+import com.example.rentavehicleagency.requests.entities.RequestEntity;
 import com.example.rentavehicleagency.businesses.repositories.BusinessRepository;
 
 @Service
@@ -36,9 +36,9 @@ public class BusinessService {
 		return businessRepository.findById(id).orElse(null);
 	}
 	
-	public void registerProfit(BusinessEntity businessEntity, Request request) {
-		long daysDifference=calculateDaysDifference(request.getStartTime(), request.getEndTime());
-		float profitFromRequest=request.getVehicle().getPrice()*daysDifference;
+	public void registerProfit(BusinessEntity businessEntity, RequestEntity requestEntity) {
+		long daysDifference=calculateDaysDifference(requestEntity.getStartTime(), requestEntity.getEndTime());
+		float profitFromRequest= requestEntity.getVehicleEntity().getPrice()*daysDifference;
 		businessEntity.setProfit(profitFromRequest+ businessEntity.getProfit());
 		businessRepository.save(businessEntity);
 	}

@@ -12,14 +12,14 @@
 <body>
 	<div class="simple-container">
 		<h1 class="simple-header">Add Report</h1>
-		<a th:href="@{/redirect-from-report}" class="redirect-button">Return</a>
-		<form th:action="@{/add-report-submit}" method="post" th:object="${report}">
+		<a th:href="@{/redirect-from-reportEntity}" class="redirect-button">Return</a>
+		<form th:action="@{/add-reportEntity-submit}" method="post" th:object="${reportEntity}">
 			<label for="title">Title:</label>
-			<input th:field="*{title}" type="text" id="title" name="title" placeholder="Enter report title" required>
+			<input th:field="*{title}" type="text" id="title" name="title" placeholder="Enter reportEntity title" required>
 			<br/>
 			<label for="content">Report Content:</label>
 			<br/>
-			<textarea th:field="*{content}" id="content" name="content" placeholder="Enter report content" rows="10" cols="80" required></textarea>
+			<textarea th:field="*{content}" id="content" name="content" placeholder="Enter reportEntity content" rows="10" cols="80" required></textarea>
 			<br/>
 			<label for="priority">Priority:</label>
 			<select id="priority" th:field="*{priority}">

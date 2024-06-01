@@ -15,8 +15,8 @@
 		<div>
 			<a th:href="@{/add-businessEntity}" class="header-button">Add new Business</a>
 			<a th:href="@{/add-directorEntity}" class="header-button">Add new Director</a>
-			<a th:href="@{/add-employee}" class="header-button">Add new Employee</a>
-			<a th:href="@{/add-vehicle}" class="header-button">Add new Vehicle</a>
+			<a th:href="@{/add-employeeEntity}" class="header-button">Add new Employee</a>
+			<a th:href="@{/add-vehicleEntity}" class="header-button">Add new Vehicle</a>
 			<span sec:authorize="isAuthenticated"><a th:href="@{/logout}" class="header-button">Logout</a></span>
 		</div>
 	</div>
@@ -41,15 +41,15 @@
 		<h2 class="section-header">List of reports:</h2>
 	</div>
 	<div class="section-container">
-		<div th:each="report : ${allReports}" class="report-info-container-owner">
-			<div class="report-image-container">
+		<div th:each="reportEntity : ${allReportEntities}" class="reportEntity-info-container-owner">
+			<div class="reportEntity-image-container">
 				<img src="/images/reporticon.png" alt="Report Icon" class="scale-image">
 			</div>
-			<p class="section-text">Title: <span th:text="${report.getTitle()}"></span></p>
-			<p class="section-text">Priority: <span th:text="${report.getPriority()}"></span></p>
-			<p class="section-text">Creation Date: <span th:text="${report.getCreationDate()}"></span></p>
-			<p class="section-text">Employee: <span th:text="${report.getEmployee().getUserEntity().getFirstName() + ' ' + report.getEmployee().getUserEntity().getLastName()}"></span></p>
-			<p class="section-text">Role: <span th:text="${report.getEmployee().getUserEntity().getRole()}"></span></p>
+			<p class="section-text">Title: <span th:text="${reportEntity.getTitle()}"></span></p>
+			<p class="section-text">Priority: <span th:text="${reportEntity.getPriority()}"></span></p>
+			<p class="section-text">Creation Date: <span th:text="${reportEntity.getCreationDate()}"></span></p>
+			<p class="section-text">Employee: <span th:text="${reportEntity.getEmployeeEntity().getUserEntity().getFirstName() + ' ' + reportEntity.getEmployeeEntity().getUserEntity().getLastName()}"></span></p>
+			<p class="section-text">Role: <span th:text="${reportEntity.getEmployeeEntity().getUserEntity().getRole()}"></span></p>
 		</div>
 	</div>
 	
@@ -57,14 +57,14 @@
 		<h2 class="section-header">List of agency vehicles:</h2>
 	</div>
 	<div class="section-container">
-		<div th:each="vehicle : ${allVehiclesWithImages}" class="owner-vehicle-container">
+		<div th:each="vehicleEntity : ${allVehiclesWithImages}" class="owner-vehicleEntity-container">
 			<div class="owner-image-container">
-				<img th:if="${vehicle.getImageName() != null}" th:src="'/vehicle_images/'+${vehicle.getImageName()}" alt="Vehicle Image" class="scale-image">
+				<img th:if="${vehicleEntity.getImageName() != null}" th:src="'/vehicle_images/'+${vehicleEntity.getImageName()}" alt="Vehicle Image" class="scale-image">
 			</div>
-			<p class="offer-text">Brand: <span th:text="${vehicle.getBrand()}"></span></p>
-			<p class="offer-text">Model Name: <span th:text="${vehicle.getModelName()}"></span></p>
-			<p class="offer-text">Price: <span th:text="${vehicle.getPrice() + ' $'}"></span></p>
-			<a th:href="@{/remove-vehicle/{id}(id=${vehicle.getId()})}" class="form-button-extended red-button-bg">REMOVE</a>
+			<p class="offer-text">Brand: <span th:text="${vehicleEntity.getBrand()}"></span></p>
+			<p class="offer-text">Model Name: <span th:text="${vehicleEntity.getModelName()}"></span></p>
+			<p class="offer-text">Price: <span th:text="${vehicleEntity.getPrice() + ' $'}"></span></p>
+			<a th:href="@{/remove-vehicleEntity/{id}(id=${vehicleEntity.getId()})}" class="form-button-extended red-button-bg">REMOVE</a>
 		</div>
 	</div>
 	

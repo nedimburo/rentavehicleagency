@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.rentavehicleagency.models.Employee;
-import com.example.rentavehicleagency.models.ImageVehicle;
-import com.example.rentavehicleagency.models.Vehicle;
+import com.example.rentavehicleagency.employees.entities.EmployeeEntity;
+import com.example.rentavehicleagency.vehicleImages.entities.VehicleImageEntity;
+import com.example.rentavehicleagency.vehicles.entities.VehicleEntity;
 import com.example.rentavehicleagency.damages.services.DamageService;
-import com.example.rentavehicleagency.services.EmployeeService;
-import com.example.rentavehicleagency.services.ImageVehicleService;
+import com.example.rentavehicleagency.employees.services.EmployeeService;
+import com.example.rentavehicleagency.vehicleImages.services.VehicleImageService;
 import com.example.rentavehicleagency.users.services.UserService;
-import com.example.rentavehicleagency.services.VehicleService;
+import com.example.rentavehicleagency.vehicles.services.VehicleService;
 
 @Controller
 public class DamageController {
@@ -32,7 +32,7 @@ public class DamageController {
 	private VehicleService vehicleService;
 	
 	@Autowired
-	private ImageVehicleService imageVehicleService;
+	private VehicleImageService vehicleImageService;
 	
 	@Autowired
 	private UserService userService;
@@ -42,9 +42,9 @@ public class DamageController {
 	
 	@GetMapping("/report-damage/{vehicleId}")
 	public String reportDamagePage(@PathVariable Long vehicleId, Model model) {
-		Vehicle vehicle=vehicleService.getVehicleById(vehicleId);
-		ImageVehicle vehicleImage=imageVehicleService.getVehicleImages(vehicleId).get(0);
-		model.addAttribute("vehicle", vehicle);
+		VehicleEntity vehicleEntity =vehicleService.getVehicleById(vehicleId);
+		VehicleImageEntity vehicleImage= vehicleImageService.getVehicleImages(vehicleId).get(0);
+		model.addAttribute("vehicle", vehicleEntity);
 		model.addAttribute("vehicleImage", vehicleImage);
 		model.addAttribute("damage", new DamageEntity());
 		return "addDamage";
@@ -53,11 +53,11 @@ public class DamageController {
 	@PostMapping("/report-damage/{vehicleId}/submit")
 	public String submitDamage(@PathVariable Long vehicleId, Principal principal, @ModelAttribute("damage") DamageEntity damageEntity) {
 		UserEntity userEntity =userService.getUserByEmail(principal.getName());
-		Employee employee=employeeService.findEmployeeByUserId(userEntity.getId());
-		Vehicle vehicle=vehicleService.getVehicleById(vehicleId);
-		damageEntity.setEmployee(employee);
-		damageEntity.setVehicle(vehicle);
-		vehicleService.setVehicleStatus(vehicle, "DAMAGED");
+		EmployeeEntity employeeEntity =employeeService.findEmployeeByUserId(userEntity.getId());
+		VehicleEntity vehicleEntity =vehicleService.getVehicleById(vehicleId);
+		damageEntity.setEmployeeEntity(employeeEntity);
+		damageEntity.setVehicleEntity(vehicleEntity);
+		vehicleService.setVehicleStatus(vehicleEntity, "DAMAGED");
 		damageService.saveDamage(damageEntity);
 		return "redirect:/maintenance-dashboard-page";
 	}
@@ -65,12 +65,12 @@ public class DamageController {
 	@GetMapping("/record-fix/{vehicleId}")
 	public String recordFix(@PathVariable Long vehicleId, Principal principal) {
 		UserEntity userEntity =userService.getUserByEmail(principal.getName());
-		Employee employee=employeeService.findEmployeeByUserId(userEntity.getId());
-		Vehicle vehicle=vehicleService.getVehicleById(vehicleId);
+		EmployeeEntity employeeEntity =employeeService.findEmployeeByUserId(userEntity.getId());
+		VehicleEntity vehicleEntity =vehicleService.getVehicleById(vehicleId);
 		DamageEntity activeDamageEntity =damageService.getActiveDamage(vehicleId);
-		vehicleService.setVehicleStatus(vehicle, "AVAILABLE");
+		vehicleService.setVehicleStatus(vehicleEntity, "AVAILABLE");
 		activeDamageEntity.setFixDate(LocalDate.now());
-		activeDamageEntity.setEmployee(employee);
+		activeDamageEntity.setEmployeeEntity(employeeEntity);
 		damageService.resolveDamage(activeDamageEntity);
 		return "redirect:/maintenance-dashboard-page";
 	}

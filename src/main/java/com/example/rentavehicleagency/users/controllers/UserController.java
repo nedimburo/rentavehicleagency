@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
+import com.example.rentavehicleagency.employees.entities.EmployeeEntity;
 import com.example.rentavehicleagency.users.entities.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,24 +16,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.rentavehicleagency.dto.RequestDto;
-import com.example.rentavehicleagency.dto.VehicleDisplayDto;
+import com.example.rentavehicleagency.requests.payloads.RequestDto;
+import com.example.rentavehicleagency.vehicles.payloads.VehicleDisplayDto;
 import com.example.rentavehicleagency.clients.entities.ClientEntity;
 import com.example.rentavehicleagency.directors.entities.DirectorEntity;
-import com.example.rentavehicleagency.models.Employee;
-import com.example.rentavehicleagency.models.ImageVehicle;
-import com.example.rentavehicleagency.models.Report;
-import com.example.rentavehicleagency.models.Request;
-import com.example.rentavehicleagency.models.Vehicle;
+import com.example.rentavehicleagency.vehicleImages.entities.VehicleImageEntity;
+import com.example.rentavehicleagency.reports.entities.ReportEntity;
+import com.example.rentavehicleagency.requests.entities.RequestEntity;
+import com.example.rentavehicleagency.vehicles.entities.VehicleEntity;
 import com.example.rentavehicleagency.businesses.services.BusinessService;
 import com.example.rentavehicleagency.clients.services.ClientService;
 import com.example.rentavehicleagency.directors.services.DirectorService;
-import com.example.rentavehicleagency.services.EmployeeService;
-import com.example.rentavehicleagency.services.ImageVehicleService;
-import com.example.rentavehicleagency.services.ReportService;
-import com.example.rentavehicleagency.services.RequestService;
+import com.example.rentavehicleagency.employees.services.EmployeeService;
+import com.example.rentavehicleagency.vehicleImages.services.VehicleImageService;
+import com.example.rentavehicleagency.reports.services.ReportService;
+import com.example.rentavehicleagency.requests.services.RequestService;
 import com.example.rentavehicleagency.users.services.UserService;
-import com.example.rentavehicleagency.services.VehicleService;
+import com.example.rentavehicleagency.vehicles.services.VehicleService;
 
 @Controller
 public class UserController {
@@ -44,7 +44,7 @@ public class UserController {
 	private VehicleService vehicleService;
 	
 	@Autowired
-	private ImageVehicleService imageVehicleService;
+	private VehicleImageService vehicleImageService;
 	
 	@Autowired
 	private RequestService requestService;
@@ -84,9 +84,9 @@ public class UserController {
 	@GetMapping("/user-page")
 	public String userPage(Model model, Principal principal) {
 		UserEntity userEntity =userService.getUserByEmail(principal.getName());
-		List<Vehicle> allVehicles=vehicleService.getAllVehicles();
-		List<ImageVehicle> allVehiclesImages=imageVehicleService.getAllImageVehicles();
-		List<VehicleDisplayDto> allVehiclesWithImages=vehicleService.getAllVehiclesWithImages(allVehicles, allVehiclesImages);
+		List<VehicleEntity> allVehicleEntities =vehicleService.getAllVehicles();
+		List<VehicleImageEntity> allVehiclesImages= vehicleImageService.getAllImageVehicles();
+		List<VehicleDisplayDto> allVehiclesWithImages=vehicleService.getAllVehiclesWithImages(allVehicleEntities, allVehiclesImages);
 		model.addAttribute("user", userEntity);
 		model.addAttribute("allVehiclesWithImages", allVehiclesWithImages);
 		return "user";
@@ -112,13 +112,13 @@ public class UserController {
 	public String ownerPage(Model model, Principal principal) {
 		UserEntity userEntity =userService.getUserByEmail(principal.getName());
 		List<BusinessEntity> allBusinessEntities =businessService.getAllBusinesses();
-		List<Report> allReports=reportService.getAllReports();
-		List<Vehicle> allVehicles=vehicleService.getAllVehicles();
-		List<ImageVehicle> allVehiclesImages=imageVehicleService.getAllImageVehicles();
-		List<VehicleDisplayDto> allVehiclesWithImages=vehicleService.getAllVehiclesWithImages(allVehicles, allVehiclesImages);
+		List<ReportEntity> allReportEntities =reportService.getAllReports();
+		List<VehicleEntity> allVehicleEntities =vehicleService.getAllVehicles();
+		List<VehicleImageEntity> allVehiclesImages= vehicleImageService.getAllImageVehicles();
+		List<VehicleDisplayDto> allVehiclesWithImages=vehicleService.getAllVehiclesWithImages(allVehicleEntities, allVehiclesImages);
 		model.addAttribute("user", userEntity);
 		model.addAttribute("allBusinesses", allBusinessEntities);
-		model.addAttribute("allReports", allReports);
+		model.addAttribute("allReports", allReportEntities);
 		model.addAttribute("allVehiclesWithImages", allVehiclesWithImages);
 		return "owner";
 	}
@@ -128,9 +128,9 @@ public class UserController {
 		UserEntity userEntity =userService.getUserByEmail(principal.getName());
 		DirectorEntity directorEntity =directorService.findDirectorByUserId(userEntity.getId());
 		BusinessEntity businessEntity =businessService.getBusinessById(directorEntity.getBusinessEntity().getId());
-		List<Vehicle> allVehicles=vehicleService.getAllVehiclesByBusinessId(businessEntity.getId());
-		List<ImageVehicle> allVehiclesImages=imageVehicleService.getAllImageVehicles();
-		List<VehicleDisplayDto> allVehiclesWithImages=vehicleService.getAllVehiclesWithImages(allVehicles, allVehiclesImages);
+		List<VehicleEntity> allVehicleEntities =vehicleService.getAllVehiclesByBusinessId(businessEntity.getId());
+		List<VehicleImageEntity> allVehiclesImages= vehicleImageService.getAllImageVehicles();
+		List<VehicleDisplayDto> allVehiclesWithImages=vehicleService.getAllVehiclesWithImages(allVehicleEntities, allVehiclesImages);
 		model.addAttribute("user", userEntity);
 		model.addAttribute("director", directorEntity);
 		model.addAttribute("business", businessEntity);
@@ -141,11 +141,11 @@ public class UserController {
 	@GetMapping("/hr-page")
 	public String humanResourcesPage(Model model, Principal principal) {
 		UserEntity userEntity =userService.getUserByEmail(principal.getName());
-		Employee employee=employeeService.findEmployeeByUserId(userEntity.getId());
-		List<Employee> businessEmployees=employeeService.getAllEmployeesFromBusiness(employee.getBusinessEntity().getId());
-		BusinessEntity businessEntity =businessService.getBusinessById(employee.getBusinessEntity().getId());
+		EmployeeEntity employeeEntity =employeeService.findEmployeeByUserId(userEntity.getId());
+		List<EmployeeEntity> businessEmployeeEntities =employeeService.getAllEmployeesFromBusiness(employeeEntity.getBusinessEntity().getId());
+		BusinessEntity businessEntity =businessService.getBusinessById(employeeEntity.getBusinessEntity().getId());
 		model.addAttribute("user", userEntity);
-		model.addAttribute("businessEmployees", businessEmployees);
+		model.addAttribute("businessEmployees", businessEmployeeEntities);
 		model.addAttribute("business", businessEntity);
 		return "humanResources";
 	}
@@ -153,11 +153,11 @@ public class UserController {
 	@GetMapping("/finance-page")
 	public String financePage(Model model, Principal principal) {
 		UserEntity userEntity =userService.getUserByEmail(principal.getName());
-		Employee employee=employeeService.findEmployeeByUserId(userEntity.getId());
-		BusinessEntity businessEntity =businessService.getBusinessById(employee.getBusinessEntity().getId());
+		EmployeeEntity employeeEntity =employeeService.findEmployeeByUserId(userEntity.getId());
+		BusinessEntity businessEntity =businessService.getBusinessById(employeeEntity.getBusinessEntity().getId());
 		List<RequestDto> allRequests=requestService.getRequestsForFinances();
 		model.addAttribute("user", userEntity);
-		model.addAttribute("employee", employee);
+		model.addAttribute("employee", employeeEntity);
 		model.addAttribute("business", businessEntity);
 		model.addAttribute("allRequests", allRequests);
 		return "finance";
@@ -166,20 +166,20 @@ public class UserController {
 	@GetMapping("/rent-dashboard-page")
 	public String rentDashboardPage(Model model, Principal principal) {
 		UserEntity userEntity =userService.getUserByEmail(principal.getName());
-		List<Request> allRequests=requestService.getAllRequest();
+		List<RequestEntity> allRequestEntities =requestService.getAllRequest();
 		model.addAttribute("user", userEntity);
-		model.addAttribute("allRequests", allRequests);
+		model.addAttribute("allRequests", allRequestEntities);
 		return "rentDashboard";
 	}
 	
 	@GetMapping("/maintenance-dashboard-page")
 	public String maintenanceDashboardPage(Model model, Principal principal) {
 		UserEntity userEntity =userService.getUserByEmail(principal.getName());
-		Employee employee=employeeService.findEmployeeByUserId(userEntity.getId());
-		BusinessEntity businessEntity =businessService.getBusinessById(employee.getBusinessEntity().getId());
-		List<Vehicle> allVehicles=vehicleService.getAllVehicles();
-		List<ImageVehicle> allVehiclesImages=imageVehicleService.getAllImageVehicles();
-		List<VehicleDisplayDto> allVehiclesWithImages=vehicleService.getAllVehiclesWithImages(allVehicles, allVehiclesImages);
+		EmployeeEntity employeeEntity =employeeService.findEmployeeByUserId(userEntity.getId());
+		BusinessEntity businessEntity =businessService.getBusinessById(employeeEntity.getBusinessEntity().getId());
+		List<VehicleEntity> allVehicleEntities =vehicleService.getAllVehicles();
+		List<VehicleImageEntity> allVehiclesImages= vehicleImageService.getAllImageVehicles();
+		List<VehicleDisplayDto> allVehiclesWithImages=vehicleService.getAllVehiclesWithImages(allVehicleEntities, allVehiclesImages);
 		model.addAttribute("user", userEntity);
 		model.addAttribute("business", businessEntity);
 		model.addAttribute("allVehiclesWithImages", allVehiclesWithImages);
@@ -188,9 +188,9 @@ public class UserController {
 	
 	@GetMapping("/home-page")
 	public String homePage(Model model) {
-		List<Vehicle> allVehicles=vehicleService.getAllVehicles();
-		List<ImageVehicle> allVehiclesImages=imageVehicleService.getAllImageVehicles();
-		List<VehicleDisplayDto> allVehiclesWithImages=vehicleService.getAllVehiclesWithImages(allVehicles, allVehiclesImages);
+		List<VehicleEntity> allVehicleEntities =vehicleService.getAllVehicles();
+		List<VehicleImageEntity> allVehiclesImages= vehicleImageService.getAllImageVehicles();
+		List<VehicleDisplayDto> allVehiclesWithImages=vehicleService.getAllVehiclesWithImages(allVehicleEntities, allVehiclesImages);
 		model.addAttribute("allVehiclesWithImages", allVehiclesWithImages);
 		return "home";
 	}

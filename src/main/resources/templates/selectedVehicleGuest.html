@@ -15,20 +15,20 @@
 	<div class="simple-container">
 		<h1 class="simple-header">Selected Vehicle</h1>
 		<a th:href="@{/home-page}" class="redirect-button">Return</a>
-		<div th:each="vehicleImage : ${vehicleImages}" class="slide-vehicle-image-container forSlide">
+		<div th:each="vehicleImage : ${vehicleImages}" class="slide-vehicleEntity-image-container forSlide">
 			<img th:if="${vehicleImage.getImageName() != null}" th:src="'/vehicle_images/'+${vehicleImage.getImageName()}" alt="Vehicle Image" class="scale-image">
 		</div>
 		<div class="image-controls-container">
 			<a href="#" class="prev">&lt;</a>
 			<a href="#" class="next">&gt;</a>
 		</div>
-		<div class="selected-vehicle-info-container">
-			<p>Vehicle Name: <span th:text="${vehicle.getBrand() + ' ' + vehicle.getModelName()}"></span></p>
-			<p>Model Year: <span th:text="${vehicle.getModelYear()}"></span></p>
-			<p>Engine: <span th:text="${vehicle.getEngineDisplacement() + ' cc (' + vehicle.getHorsepower() + ' hp) ' + vehicle.getFuel()}"></span></p>
-			<p>Transmission: <span th:text="${vehicle.getTransmission()}"></span></p>
-			<p>Body type: <span th:text="${vehicle.getBodyShape() + ' ' + vehicle.getColor()}"></span></p>
-			<p>Price: <span th:text="${vehicle.getPrice() + ' $'}"></span></p>
+		<div class="selected-vehicleEntity-info-container">
+			<p>Vehicle Name: <span th:text="${vehicleEntity.getBrand() + ' ' + vehicleEntity.getModelName()}"></span></p>
+			<p>Model Year: <span th:text="${vehicleEntity.getModelYear()}"></span></p>
+			<p>Engine: <span th:text="${vehicleEntity.getEngineDisplacement() + ' cc (' + vehicleEntity.getHorsepower() + ' hp) ' + vehicleEntity.getFuel()}"></span></p>
+			<p>Transmission: <span th:text="${vehicleEntity.getTransmission()}"></span></p>
+			<p>Body type: <span th:text="${vehicleEntity.getBodyShape() + ' ' + vehicleEntity.getColor()}"></span></p>
+			<p>Price: <span th:text="${vehicleEntity.getPrice() + ' $'}"></span></p>
 		</div>
 	</div>
 </body>

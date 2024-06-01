@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rent a vehicle Agency</title>
+    <title>Rent a vehicleEntity Agency</title>
     <link rel="stylesheet" th:href="@{/css/mainPages.css}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
 <body>
 	<div class="main-title-container">
 		<img id="menuButton" class="menu" src="/images/menu.svg">
-		<h1 class="main-title">Rent-a-vehicle Agency</h1>
+		<h1 class="main-title">Rent-a-vehicleEntity Agency</h1>
 	</div>
 	
 	<div class="side-menu">
@@ -46,14 +46,14 @@
 		<h2 class="simple-header">Below is the list of vehicles we offer: </h2>
 	</div>
 	<div class="offer-container">
-	    <div th:each="vehicle : ${allVehiclesWithImages}" class="offer-vehicle-container">
+	    <div th:each="vehicleEntity : ${allVehiclesWithImages}" class="offer-vehicleEntity-container">
 			<div class="offer-image-container">
-				<img th:if="${vehicle.getImageName() != null}" th:src="'/vehicle_images/'+${vehicle.getImageName()}" alt="Vehicle Image" class="scale-image">
+				<img th:if="${vehicleEntity.getImageName() != null}" th:src="'/vehicle_images/'+${vehicleEntity.getImageName()}" alt="Vehicle Image" class="scale-image">
 			</div>
-			<p class="offer-text">Brand: <span th:text="${vehicle.getBrand()}"></span></p>
-			<p class="offer-text">Model Name: <span th:text="${vehicle.getModelName()}"></span></p>
-			<p class="offer-text">Price: <span th:text="${vehicle.getPrice() + ' $'}"></span></p>
-			<a th:href="@{/selected-vehicle/{vehicleId}(vehicleId=${vehicle.getId()})}" class="form-button-extended">SELECT</a>
+			<p class="offer-text">Brand: <span th:text="${vehicleEntity.getBrand()}"></span></p>
+			<p class="offer-text">Model Name: <span th:text="${vehicleEntity.getModelName()}"></span></p>
+			<p class="offer-text">Price: <span th:text="${vehicleEntity.getPrice() + ' $'}"></span></p>
+			<a th:href="@{/selected-vehicleEntity/{vehicleId}(vehicleId=${vehicleEntity.getId()})}" class="form-button-extended">SELECT</a>
 		</div>
 	</div>
 	
@@ -65,7 +65,7 @@
 		</div>
 		<div class="footer-item">
 			<span>&copy;2024<br>
-                Rent-a-vehicle Agency<br>
+                Rent-a-vehicleEntity Agency<br>
                 wwww.rentavehicleagency.com<br></span>
 		</div>
 		<div class="footer-item-with-links">

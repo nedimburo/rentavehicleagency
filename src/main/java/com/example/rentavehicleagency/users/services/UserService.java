@@ -4,7 +4,7 @@ package com.example.rentavehicleagency.users.services;
 import java.io.IOException;
 
 import com.example.rentavehicleagency.clients.services.ClientService;
-import com.example.rentavehicleagency.services.FileStorageService;
+import com.example.rentavehicleagency.configuration.service.FileStorageService;
 import com.example.rentavehicleagency.users.entities.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
