@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DirectorRepository extends JpaRepository<DirectorEntity, Long>{
-	DirectorEntity findByUserId(Long userId);
-	DirectorEntity findByBusinessId(Long businessId);
+	DirectorEntity findByUserEntityId(Long userEntityId);
+	DirectorEntity findByBusinessEntityId(Long businessEntityId);
 }

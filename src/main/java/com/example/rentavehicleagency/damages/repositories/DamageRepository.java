@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DamageRepository extends JpaRepository<DamageEntity, Long>{
-	List<DamageEntity> findByVehicleId(Long vehicleId);
-	List<DamageEntity> findByEmployeeId(Long employeeId);
+	List<DamageEntity> findByVehicleEntityId(Long vehicleEntityId);
+	List<DamageEntity> findByEmployeeEntityId(Long employeeEntityId);
 	void deleteById(Long damageId);
 }

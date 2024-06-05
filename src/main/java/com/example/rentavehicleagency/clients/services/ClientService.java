@@ -21,11 +21,11 @@ public class ClientService {
 	}
 	
 	public ClientEntity findClientByUserId(Long userId) {
-		return clientRepository.findByUserId(userId);
+		return clientRepository.findByUserEntityId(userId);
 	}
 	
 	public void addClientInformation(ClientEntity updatedClientEntity) {
-		ClientEntity existingClientEntity =clientRepository.findByUserId(updatedClientEntity.getUserEntity().getId());
+		ClientEntity existingClientEntity =clientRepository.findByUserEntityId(updatedClientEntity.getUserEntity().getId());
 		if (existingClientEntity !=null) {
 			existingClientEntity.setAddress(updatedClientEntity.getAddress());
 			existingClientEntity.setContactNumber(updatedClientEntity.getContactNumber());

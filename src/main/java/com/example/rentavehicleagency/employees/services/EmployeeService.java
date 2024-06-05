@@ -40,11 +40,11 @@ public class EmployeeService {
 	}
 	
 	public EmployeeEntity findEmployeeByUserId(Long userId) {
-		return employeeRepository.findByUserId(userId);
+		return employeeRepository.findByUserEntityId(userId);
 	}
 	
 	public List<EmployeeEntity> getAllEmployeesFromBusiness(Long businessId){
-		return employeeRepository.findByBusinessId(businessId);
+		return employeeRepository.findByBusinessEntityId(businessId);
 	}
 	
 	public void fireEmployee(Long id) {

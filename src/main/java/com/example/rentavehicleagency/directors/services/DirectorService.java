@@ -20,10 +20,10 @@ public class DirectorService {
 	}
 	
 	public DirectorEntity findDirectorByUserId(Long userId) {
-		return directorRepository.findByUserId(userId);
+		return directorRepository.findByUserEntityId(userId);
 	}
 	
 	public DirectorEntity findDirectorByBusinessId(Long businessId) {
-		return directorRepository.findByBusinessId(businessId);
+		return directorRepository.findByBusinessEntityId(businessId);
 	}
 }

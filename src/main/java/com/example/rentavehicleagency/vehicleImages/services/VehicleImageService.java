@@ -40,7 +40,7 @@ public class VehicleImageService {
 	}
 	
 	public List<VehicleImageEntity> getVehicleImages(Long id){
-		return vehicleImageRepository.findByVehicleId(id);
+		return vehicleImageRepository.findByVehicleEntityId(id);
 	}
 	
 	public void deleteImageVehicleById(Long id) {

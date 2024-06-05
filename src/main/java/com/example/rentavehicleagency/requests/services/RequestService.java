@@ -45,7 +45,7 @@ public class RequestService {
 	}
 	
 	public List<RequestEntity> getAllClientsRequestsById(Long clientId){
-		return requestRepository.findByClientId(clientId);
+		return requestRepository.findByClientEntityId(clientId);
 	}
 	
 	public List<RequestDto> getRequestsForFinances(){
@@ -76,7 +76,7 @@ public class RequestService {
 	}
 	
 	public List<RequestEntity> findRequestsByEmployeeId(Long employeeId){
-		return requestRepository.findByEmployeeId(employeeId);
+		return requestRepository.findByEmployeeEntityId(employeeId);
 	}
 	
 	public void deleteRequestById(Long id) {
@@ -84,6 +84,6 @@ public class RequestService {
 	}
 	
 	public List<RequestEntity> findRequestsByVehicleId(Long vehicleId){
-		return requestRepository.findByVehicleId(vehicleId);
+		return requestRepository.findByVehicleEntityId(vehicleId);
 	}
 }

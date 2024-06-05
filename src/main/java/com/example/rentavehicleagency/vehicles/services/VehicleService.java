@@ -84,7 +84,7 @@ public class VehicleService {
 	}
 	
 	public List<VehicleEntity> getAllVehiclesByBusinessId(Long businessId){
-		return vehicleRepository.findByBusinessId(businessId);
+		return vehicleRepository.findByBusinessEntityId(businessId);
 	}
 	
 	public void removeVehicle(Long id) {

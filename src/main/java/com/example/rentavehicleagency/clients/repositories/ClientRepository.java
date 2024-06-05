@@ -7,5 +7,5 @@ import com.example.rentavehicleagency.clients.entities.ClientEntity;
 
 @Repository
 public interface ClientRepository extends JpaRepository<ClientEntity, Long>{
-	ClientEntity findByUserId(Long userId);
+	ClientEntity findByUserEntityId(Long userEntityId);
 }

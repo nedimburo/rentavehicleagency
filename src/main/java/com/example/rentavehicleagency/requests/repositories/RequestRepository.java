@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RequestRepository extends JpaRepository<RequestEntity, Long>{
-	List<RequestEntity> findByClientId(Long clientId);
-	List<RequestEntity> findByEmployeeId(Long employeeId);
-	List<RequestEntity> findByVehicleId(Long vehicleId);
+	List<RequestEntity> findByClientEntityId(Long clientEntityId);
+	List<RequestEntity> findByEmployeeEntityId(Long employeeEntityId);
+	List<RequestEntity> findByVehicleEntityId(Long vehicleEntityId);
 	void deleteById(Long requestId);
 }

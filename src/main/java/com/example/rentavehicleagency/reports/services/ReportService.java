@@ -25,7 +25,7 @@ public class ReportService {
 	}
 	
 	public List<ReportEntity> findReportsByEmployeeId(Long employeeId){
-		return reportRepository.findByEmployeeId(employeeId);
+		return reportRepository.findByEmployeeEntityId(employeeId);
 	}
 	
 	public void deleteReportById(Long id) {

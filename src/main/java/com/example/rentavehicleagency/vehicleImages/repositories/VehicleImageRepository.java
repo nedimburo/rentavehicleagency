@@ -9,6 +9,6 @@ import com.example.rentavehicleagency.vehicleImages.entities.VehicleImageEntity;
 
 @Repository
 public interface VehicleImageRepository extends JpaRepository<VehicleImageEntity, Long>{
-	List<VehicleImageEntity> findByVehicleId(Long vehicleId);
+	List<VehicleImageEntity> findByVehicleEntityId(Long vehicleEntityId);
 	void deleteById(Long id);
 }

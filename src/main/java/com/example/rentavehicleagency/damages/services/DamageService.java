@@ -25,7 +25,7 @@ public class DamageService {
 	}
 	
 	public List<DamageEntity> getDamagesByVehicleId(Long vehicleId) {
-		return damageRepository.findByVehicleId(vehicleId);
+		return damageRepository.findByVehicleEntityId(vehicleId);
 	}
 	
 	public DamageEntity getActiveDamage(Long vehicleId) {
@@ -45,7 +45,7 @@ public class DamageService {
 	}
 	
 	public List<DamageEntity> getDamagesByEmployeeId(Long employeeId){
-		return damageRepository.findByEmployeeId(employeeId);
+		return damageRepository.findByEmployeeEntityId(employeeId);
 	}
 	
 	public void deleteDamageById(Long id) {

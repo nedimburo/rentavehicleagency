@@ -9,6 +9,6 @@ import com.example.rentavehicleagency.reports.entities.ReportEntity;
 
 @Repository
 public interface ReportRepository extends JpaRepository<ReportEntity, Long>{
-	List<ReportEntity> findByEmployeeId(Long employeeId);
+	List<ReportEntity> findByEmployeeEntityId(Long employeeEntityId);
 	void deleteById(Long employeeId);
 }
