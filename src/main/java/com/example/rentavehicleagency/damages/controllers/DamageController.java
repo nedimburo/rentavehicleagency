@@ -5,13 +5,13 @@ import java.time.LocalDate;
 
 import com.example.rentavehicleagency.damages.entities.DamageEntity;
 import com.example.rentavehicleagency.users.entities.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.employees.entities.EmployeeEntity;
 import com.example.rentavehicleagency.vehicleImages.entities.VehicleImageEntity;
@@ -22,23 +22,23 @@ import com.example.rentavehicleagency.vehicleImages.services.VehicleImageService
 import com.example.rentavehicleagency.users.services.UserService;
 import com.example.rentavehicleagency.vehicles.services.VehicleService;
 
-@Controller
+@Slf4j
+@Getter
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("public/damage")
+@Tags(value = {@Tag(name = "Public | Damage"), @Tag(name = "operationIdNamePublicDamage")})
 public class DamageController {
 
-	@Autowired
-	private DamageService damageService;
+	private final DamageService damageService;
+
+	private final VehicleService vehicleService;
+
+	private final VehicleImageService vehicleImageService;
 	
-	@Autowired
-	private VehicleService vehicleService;
+	private final UserService userService;
 	
-	@Autowired
-	private VehicleImageService vehicleImageService;
-	
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private EmployeeService employeeService;
+	private final EmployeeService employeeService;
 	
 	@GetMapping("/report-damage/{vehicleId}")
 	public String reportDamagePage(@PathVariable Long vehicleId, Model model) {

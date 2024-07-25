@@ -7,14 +7,15 @@ import com.example.rentavehicleagency.clients.entities.ClientEntity;
 import com.example.rentavehicleagency.requests.entities.RequestEntity;
 import com.example.rentavehicleagency.users.entities.UserEntity;
 import com.example.rentavehicleagency.vehicles.entities.VehicleEntity;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
 import com.example.rentavehicleagency.employees.entities.EmployeeEntity;
@@ -27,29 +28,27 @@ import com.example.rentavehicleagency.requests.services.RequestService;
 import com.example.rentavehicleagency.users.services.UserService;
 import com.example.rentavehicleagency.vehicles.services.VehicleService;
 
-@Controller
+@Slf4j
+@Getter
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("public/request")
+@Tags(value = {@Tag(name = "Public | Request"), @Tag(name = "operationIdNamePublicRequest")})
 public class RequestController {
 
-	@Autowired
-	private RequestService requestService;
+	private final RequestService requestService;
+
+	private final VehicleService vehicleService;
 	
-	@Autowired
-	private VehicleService vehicleService;
+	private final VehicleImageService vehicleImageService;
 	
-	@Autowired
-	private VehicleImageService vehicleImageService;
+	private final UserService userService;
 	
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private ClientService clientService;
-	
-	@Autowired
-	private EmployeeService employeeService;
-	
-	@Autowired
-	private BusinessService businessService;
+	private final ClientService clientService;
+
+	private final EmployeeService employeeService;
+
+	private final BusinessService businessService;
 	
 	@GetMapping("/selected-vehicle/{vehicleId}")
 	public String requestSelectedVehiclePage(@PathVariable Long vehicleId, Model model, Principal principal) {

@@ -1,20 +1,25 @@
 package com.example.rentavehicleagency.businesses.controllers;
 
 import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.businesses.services.BusinessService;
 
-@Controller
+@Slf4j
+@Getter
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("public/business")
+@Tags(value = {@Tag(name = "Public | Business"), @Tag(name = "operationIdNamePublicBusiness")})
 public class BusinessController {
 
-	@Autowired
-	private BusinessService businessService;
+	private final BusinessService businessService;
 	
 	@GetMapping("/add-business")
 	public String businessPage(Model model) {

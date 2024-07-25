@@ -2,25 +2,28 @@ package com.example.rentavehicleagency.clients.controllers;
 
 import com.example.rentavehicleagency.clients.entities.ClientEntity;
 import com.example.rentavehicleagency.users.entities.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.clients.services.ClientService;
 import com.example.rentavehicleagency.users.services.UserService;
 
-@Controller
+@Slf4j
+@Getter
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("public/client")
+@Tags(value = {@Tag(name = "Public | Client"), @Tag(name = "operationIdNamePublicClient")})
 public class ClientController {
 	
-	@Autowired
-	private ClientService clientService;
+	private final ClientService clientService;
 	
-	@Autowired
-	private UserService userService;
+	private final UserService userService;
 
 	@GetMapping("/profile/{id}/add-information")
 	public String addInformationPage(@PathVariable Long id, Model model) {

@@ -4,12 +4,13 @@ import java.util.List;
 
 import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
 import com.example.rentavehicleagency.directors.entities.DirectorEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.directors.payloads.DirectorDto;
 import com.example.rentavehicleagency.users.entities.UserEntity;
@@ -17,17 +18,19 @@ import com.example.rentavehicleagency.businesses.services.BusinessService;
 import com.example.rentavehicleagency.directors.services.DirectorService;
 import com.example.rentavehicleagency.users.services.UserService;
 
-@Controller
+@Slf4j
+@Getter
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("public/director")
+@Tags(value = {@Tag(name = "Public | Director"), @Tag(name = "operationIdNamePublicDirector")})
 public class DirectorController {
 
-	@Autowired
-	private DirectorService directorService;
+	private final DirectorService directorService;
+
+	private final BusinessService businessService;
 	
-	@Autowired
-	private BusinessService businessService;
-	
-	@Autowired
-	private UserService userService;
+	private final UserService userService;
 	
 	@GetMapping("/add-director")
 	public String addDirectorPage(Model model) {

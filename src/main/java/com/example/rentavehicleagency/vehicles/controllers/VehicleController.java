@@ -2,13 +2,15 @@ package com.example.rentavehicleagency.vehicles.controllers;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.vehicles.payloads.VehicleDto;
 import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
@@ -17,17 +19,19 @@ import com.example.rentavehicleagency.businesses.services.BusinessService;
 import com.example.rentavehicleagency.vehicleImages.services.VehicleImageService;
 import com.example.rentavehicleagency.vehicles.services.VehicleService;
 
-@Controller
+@Slf4j
+@Getter
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("public/vehicle")
+@Tags(value = {@Tag(name = "Public | Vehicle"), @Tag(name = "operationIdNamePublicVehicle")})
 public class VehicleController {
 
-	@Autowired
-	private VehicleService vehicleService;
-	
-	@Autowired
-	private BusinessService businessService;
-	
-	@Autowired
-	private VehicleImageService vehicleImageService;
+	private final VehicleService vehicleService;
+
+	private final BusinessService businessService;
+
+	private final VehicleImageService vehicleImageService;
 	
 	@GetMapping("/add-vehicle")
 	public String addVehiclePage(Model model) {

@@ -6,14 +6,13 @@ import java.util.List;
 import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
 import com.example.rentavehicleagency.employees.entities.EmployeeEntity;
 import com.example.rentavehicleagency.users.entities.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.rentavehicleagency.requests.payloads.RequestDto;
@@ -34,35 +33,31 @@ import com.example.rentavehicleagency.requests.services.RequestService;
 import com.example.rentavehicleagency.users.services.UserService;
 import com.example.rentavehicleagency.vehicles.services.VehicleService;
 
-@Controller
+@Slf4j
+@Getter
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("public/user")
+@Tags(value = {@Tag(name = "Public | User"), @Tag(name = "operationIdNamePublicUser")})
 public class UserController {
 
-	@Autowired
-	private UserService userService;
+	private final UserService userService;
+
+	private final VehicleService vehicleService;
+
+	private final VehicleImageService vehicleImageService;
+
+	private final RequestService requestService;
 	
-	@Autowired
-	private VehicleService vehicleService;
+	private final ClientService clientService;
+
+	private final EmployeeService employeeService;
 	
-	@Autowired
-	private VehicleImageService vehicleImageService;
-	
-	@Autowired
-	private RequestService requestService;
-	
-	@Autowired
-	private ClientService clientService;
-	
-	@Autowired
-	private EmployeeService employeeService;
-	
-	@Autowired
-	private BusinessService businessService;
-	
-	@Autowired
-	private DirectorService directorService;
-	
-	@Autowired
-	private ReportService reportService;
+	private final BusinessService businessService;
+
+	private final DirectorService directorService;
+
+	private final ReportService reportService;
 	
 	@GetMapping("/register")
 	public String registerPage(Model model) {
