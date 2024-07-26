@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.reports.entities.ReportEntity;
@@ -30,12 +29,6 @@ public class ReportController {
 	private final UserService userService;
 
 	private final EmployeeService employeeService;
-	
-	@GetMapping("/add-report")
-	private String addReportPage(Model model) {
-		model.addAttribute("report", new ReportEntity());
-		return "addReport";
-	}
 	
 	@PostMapping("/add-report-submit")
 	private String submitReport(@ModelAttribute("report") ReportEntity reportEntity, Principal principal) {

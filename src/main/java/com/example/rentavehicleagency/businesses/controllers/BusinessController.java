@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.businesses.services.BusinessService;
@@ -20,12 +19,6 @@ import com.example.rentavehicleagency.businesses.services.BusinessService;
 public class BusinessController {
 
 	private final BusinessService businessService;
-	
-	@GetMapping("/add-business")
-	public String businessPage(Model model) {
-		model.addAttribute("business", new BusinessEntity());
-		return "addBusiness";
-	}
 	
 	@PostMapping("/add-business-submit")
 	public String businessSubmitForm(@ModelAttribute("business") BusinessEntity businessEntity) {

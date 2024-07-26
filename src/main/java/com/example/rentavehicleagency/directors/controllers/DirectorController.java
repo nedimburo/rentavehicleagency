@@ -1,7 +1,5 @@
 package com.example.rentavehicleagency.directors.controllers;
 
-import java.util.List;
-
 import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
 import com.example.rentavehicleagency.directors.entities.DirectorEntity;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -9,7 +7,6 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.directors.payloads.DirectorDto;
@@ -31,14 +28,6 @@ public class DirectorController {
 	private final BusinessService businessService;
 	
 	private final UserService userService;
-	
-	@GetMapping("/add-director")
-	public String addDirectorPage(Model model) {
-		List<BusinessEntity> allBusinessEntities =businessService.getAllBusinesses();
-		model.addAttribute("directorDto", new DirectorDto());
-		model.addAttribute("allBusinesses", allBusinessEntities);
-		return "addDirector";
-	}
 	
 	@PostMapping("/add-director-submit")
 	public String submitDirector(@ModelAttribute("directorDto") DirectorDto directorDto) {

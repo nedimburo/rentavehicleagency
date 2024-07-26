@@ -1,15 +1,10 @@
 package com.example.rentavehicleagency.vehicles.controllers;
 
-import java.util.List;
-
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.vehicles.payloads.VehicleDto;
@@ -32,14 +27,6 @@ public class VehicleController {
 	private final BusinessService businessService;
 
 	private final VehicleImageService vehicleImageService;
-	
-	@GetMapping("/add-vehicle")
-	public String addVehiclePage(Model model) {
-		List<BusinessEntity> allBusinessEntities =businessService.getAllBusinesses();
-		model.addAttribute("vehicleDto", new VehicleDto());
-		model.addAttribute("allBusinesses", allBusinessEntities);
-		return "addVehicle";
-	}
 	
 	@PostMapping("/add-vehicle-submit")
 	public String submitVehicle(@ModelAttribute("vehicleDto") VehicleDto vehicleDto) {

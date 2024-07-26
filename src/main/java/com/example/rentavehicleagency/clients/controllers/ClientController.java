@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.clients.services.ClientService;
@@ -24,13 +23,6 @@ public class ClientController {
 	private final ClientService clientService;
 	
 	private final UserService userService;
-
-	@GetMapping("/profile/{id}/add-information")
-	public String addInformationPage(@PathVariable Long id, Model model) {
-		ClientEntity clientEntity =clientService.findClientByUserId(id);
-		model.addAttribute("client", clientEntity);
-		return "addInformation";
-	}
 	
 	@PostMapping("/profile/{id}/submit-information")
 	public String submitInformation(@ModelAttribute("client") ClientEntity clientEntity, @PathVariable Long id) {

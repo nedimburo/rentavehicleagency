@@ -1,7 +1,5 @@
 package com.example.rentavehicleagency.employees.controllers;
 
-import java.util.List;
-
 import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
 import com.example.rentavehicleagency.employees.entities.EmployeeEntity;
 import com.example.rentavehicleagency.users.entities.UserEntity;
@@ -10,7 +8,6 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.employees.payloads.EmployeeDto;
@@ -31,14 +28,6 @@ public class EmployeeController {
 	private final BusinessService businessService;
 	
 	private final UserService userService;
-	
-	@GetMapping("/add-employee")
-	public String addEmployeePage(Model model) {
-		List<BusinessEntity> allBusinessEntities =businessService.getAllBusinesses();
-		model.addAttribute("employeeDto", new EmployeeDto());
-		model.addAttribute("allBusinesses", allBusinessEntities);
-		return "addEmployee";
-	}
 	
 	@PostMapping("/add-employee-submit")
 	public String submitEmployee(@ModelAttribute("employeeDto") EmployeeDto employeeDto) {
@@ -66,14 +55,6 @@ public class EmployeeController {
 		newEmployeeEntity.setBusinessEntity(businessEntity);
 		employeeService.setEmployee(newEmployeeEntity);
 		return "redirect:/owner-page";
-	}
-	
-	@GetMapping("/add-employee-hr")
-	public String addEmployeeHRPage(Model model) {
-		List<BusinessEntity> allBusinessEntities =businessService.getAllBusinesses();
-		model.addAttribute("employeeDto", new EmployeeDto());
-		model.addAttribute("allBusinesses", allBusinessEntities);
-		return "addEmployeeHR";
 	}
 	
 	@PostMapping("/add-employee-hr-submit")

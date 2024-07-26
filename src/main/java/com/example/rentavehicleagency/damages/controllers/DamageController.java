@@ -10,11 +10,9 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.employees.entities.EmployeeEntity;
-import com.example.rentavehicleagency.vehicleImages.entities.VehicleImageEntity;
 import com.example.rentavehicleagency.vehicles.entities.VehicleEntity;
 import com.example.rentavehicleagency.damages.services.DamageService;
 import com.example.rentavehicleagency.employees.services.EmployeeService;
@@ -39,16 +37,6 @@ public class DamageController {
 	private final UserService userService;
 	
 	private final EmployeeService employeeService;
-	
-	@GetMapping("/report-damage/{vehicleId}")
-	public String reportDamagePage(@PathVariable Long vehicleId, Model model) {
-		VehicleEntity vehicleEntity =vehicleService.getVehicleById(vehicleId);
-		VehicleImageEntity vehicleImage= vehicleImageService.getVehicleImages(vehicleId).get(0);
-		model.addAttribute("vehicle", vehicleEntity);
-		model.addAttribute("vehicleImage", vehicleImage);
-		model.addAttribute("damage", new DamageEntity());
-		return "addDamage";
-	}
 	
 	@PostMapping("/report-damage/{vehicleId}/submit")
 	public String submitDamage(@PathVariable Long vehicleId, Principal principal, @ModelAttribute("damage") DamageEntity damageEntity) {
