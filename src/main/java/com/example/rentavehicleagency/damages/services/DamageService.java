@@ -3,17 +3,22 @@ package com.example.rentavehicleagency.damages.services;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.example.rentavehicleagency.damages.Damage;
 import com.example.rentavehicleagency.damages.entities.DamageEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import com.example.rentavehicleagency.damages.repositories.DamageRepository;
 
+@Slf4j
+@Getter
 @Service
-public class DamageService {
+@RequiredArgsConstructor
+public class DamageService implements Damage {
 
-	@Autowired
-	private DamageRepository damageRepository;
+	private final DamageRepository damageRepository;
 	
 	public DamageEntity getDamageById(Long id) {
 		return damageRepository.findById(id).orElse(null);

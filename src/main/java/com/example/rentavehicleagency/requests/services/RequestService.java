@@ -6,18 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.rentavehicleagency.requests.entities.RequestEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import com.example.rentavehicleagency.requests.payloads.RequestDto;
 import com.example.rentavehicleagency.employees.entities.EmployeeEntity;
 import com.example.rentavehicleagency.requests.repositories.RequestRepository;
 
+@Slf4j
+@Getter
 @Service
+@RequiredArgsConstructor
 public class RequestService {
 
-	@Autowired
-	private RequestRepository requestRepository;
+	private final RequestRepository requestRepository;
 	
 	public void saveRequest(RequestEntity requestEntity) {
 		requestEntity.setNote("None");

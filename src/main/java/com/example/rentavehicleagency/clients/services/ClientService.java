@@ -1,17 +1,22 @@
 package com.example.rentavehicleagency.clients.services;
 
+import com.example.rentavehicleagency.clients.Client;
 import com.example.rentavehicleagency.clients.entities.ClientEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import com.example.rentavehicleagency.users.entities.UserEntity;
 import com.example.rentavehicleagency.clients.repositories.ClientRepository;
 
+@Slf4j
+@Getter
 @Service
-public class ClientService {
+@RequiredArgsConstructor
+public class ClientService implements Client {
 
-	@Autowired
-	private ClientRepository clientRepository;
+	private final ClientRepository clientRepository;
 	
 	public void assignUserToClient(UserEntity userEntity) {
 		ClientEntity clientEntity =new ClientEntity();

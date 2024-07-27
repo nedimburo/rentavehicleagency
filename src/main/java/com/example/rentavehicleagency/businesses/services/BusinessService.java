@@ -5,18 +5,23 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.example.rentavehicleagency.businesses.Business;
 import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import com.example.rentavehicleagency.requests.entities.RequestEntity;
 import com.example.rentavehicleagency.businesses.repositories.BusinessRepository;
 
+@Slf4j
+@Getter
 @Service
-public class BusinessService {
+@RequiredArgsConstructor
+public class BusinessService implements Business {
 
-	@Autowired
-	private BusinessRepository businessRepository;
+	private final BusinessRepository businessRepository;
 	
 	public void registerNewBusiness(BusinessEntity businessEntity) {
 		businessEntity.setCreationDate(LocalDate.now());

@@ -2,17 +2,22 @@ package com.example.rentavehicleagency.directors.services;
 
 import java.time.LocalDate;
 
+import com.example.rentavehicleagency.directors.Director;
 import com.example.rentavehicleagency.directors.entities.DirectorEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import com.example.rentavehicleagency.directors.repositories.DirectorRepository;
 
+@Slf4j
+@Getter
 @Service
-public class DirectorService {
+@RequiredArgsConstructor
+public class DirectorService implements Director {
 
-	@Autowired
-	private DirectorRepository directorRepository;
+	private final DirectorRepository directorRepository;
 	
 	public void saveDirector(DirectorEntity directorEntity) {
 		directorEntity.setHireDate(LocalDate.now());

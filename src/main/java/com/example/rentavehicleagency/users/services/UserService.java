@@ -5,28 +5,30 @@ import java.io.IOException;
 
 import com.example.rentavehicleagency.clients.services.ClientService;
 import com.example.rentavehicleagency.configuration.service.FileStorageService;
+import com.example.rentavehicleagency.users.User;
 import com.example.rentavehicleagency.users.entities.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.rentavehicleagency.users.repositories.UserRepository;
 
+@Slf4j
+@Getter
 @Service
-public class UserService {
+@RequiredArgsConstructor
+public class UserService implements User {
+
+	private final UserRepository userRepository;
 	
-	@Autowired
-	private UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private final ClientService clientService;
 	
-	@Autowired
-	private ClientService clientService;
-	
-	@Autowired
-	private FileStorageService fileStorageService;
+	private final FileStorageService fileStorageService;
 	
 	public void registerUser(UserEntity userEntity) {
 		userEntity.setProfileImage("default_user_image.jpg");

@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.util.List;
 
 import com.example.rentavehicleagency.configuration.service.FileStorageService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.rentavehicleagency.vehicleImages.VehicleImage;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,14 +15,15 @@ import com.example.rentavehicleagency.vehicleImages.entities.VehicleImageEntity;
 import com.example.rentavehicleagency.vehicles.entities.VehicleEntity;
 import com.example.rentavehicleagency.vehicleImages.repositories.VehicleImageRepository;
 
+@Slf4j
+@Getter
 @Service
-public class VehicleImageService {
+@RequiredArgsConstructor
+public class VehicleImageService implements VehicleImage {
 
-	@Autowired
-	private VehicleImageRepository vehicleImageRepository;
+	private final VehicleImageRepository vehicleImageRepository;
 	
-	@Autowired
-	private FileStorageService fileStorageService;
+	private final FileStorageService fileStorageService;
 	
 	public void saveListImageVehicle(List<MultipartFile> images, VehicleEntity vehicleEntity) {
 		for (int i=0; i<images.size(); i++) {

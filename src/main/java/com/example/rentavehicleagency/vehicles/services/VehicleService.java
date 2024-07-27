@@ -7,8 +7,11 @@ import java.util.List;
 import com.example.rentavehicleagency.damages.services.DamageService;
 import com.example.rentavehicleagency.requests.services.RequestService;
 import com.example.rentavehicleagency.vehicleImages.services.VehicleImageService;
+import com.example.rentavehicleagency.vehicles.Vehicle;
 import com.example.rentavehicleagency.vehicles.entities.VehicleEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import com.example.rentavehicleagency.vehicles.payloads.VehicleDisplayDto;
@@ -17,20 +20,19 @@ import com.example.rentavehicleagency.vehicleImages.entities.VehicleImageEntity;
 import com.example.rentavehicleagency.requests.entities.RequestEntity;
 import com.example.rentavehicleagency.vehicles.repositories.VehicleRepository;
 
+@Slf4j
+@Getter
 @Service
-public class VehicleService {
+@RequiredArgsConstructor
+public class VehicleService implements Vehicle {
 
-	@Autowired
-	private VehicleRepository vehicleRepository;
+	private final VehicleRepository vehicleRepository;
 	
-	@Autowired
-	private DamageService damageService;
+	private final DamageService damageService;
 	
-	@Autowired
-	private VehicleImageService vehicleImageService;
+	private final VehicleImageService vehicleImageService;
 	
-	@Autowired
-	private RequestService requestService;
+	private final RequestService requestService;
 	
 	public void saveVehicle(VehicleEntity vehicleEntity) {
 		vehicleEntity.setStatus("AVAILABLE");

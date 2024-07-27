@@ -5,34 +5,35 @@ import java.util.List;
 
 import com.example.rentavehicleagency.damages.entities.DamageEntity;
 import com.example.rentavehicleagency.damages.services.DamageService;
+import com.example.rentavehicleagency.employees.Employee;
 import com.example.rentavehicleagency.employees.entities.EmployeeEntity;
 import com.example.rentavehicleagency.reports.entities.ReportEntity;
 import com.example.rentavehicleagency.reports.services.ReportService;
 import com.example.rentavehicleagency.requests.entities.RequestEntity;
 import com.example.rentavehicleagency.requests.services.RequestService;
 import com.example.rentavehicleagency.users.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import com.example.rentavehicleagency.employees.repositories.EmployeeRepository;
 
+@Slf4j
+@Getter
 @Service
-public class EmployeeService {
+@RequiredArgsConstructor
+public class EmployeeService implements Employee {
 	
-	@Autowired
-	private EmployeeRepository employeeRepository;
+	private final EmployeeRepository employeeRepository;
 	
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private DamageService damageService;
-	
-	@Autowired
-	private ReportService reportService;
+	private final UserService userService;
 
-	@Autowired
-	private RequestService requestService;
+	private final DamageService damageService;
+	
+	private final ReportService reportService;
+
+	private final RequestService requestService;
 	
 	public void setEmployee(EmployeeEntity employeeEntity) {
 		employeeEntity.setHireDate(LocalDate.now());
