@@ -39,7 +39,7 @@ public class SecurityConfig {
 				.requestMatchers("/finance-page").hasAuthority("FINEMPLOYEE")
 				.requestMatchers("/rent-dashboard-page").hasAuthority("RENTEMPLOYEE")
 				.requestMatchers("/maintenance-dashboard-page").hasAuthority("MAINTEMPLOYEE")
-				.requestMatchers("/register", "/home-page", "/user_images/**", "/selected-vehicle-guest/{vehicleId}", "/vehicle_images/**", "/images/**", "/css/**", "/js/**").permitAll()
+				.requestMatchers("/register", "/home-page", "/user_images/**", "/selected-vehicle-guest/{vehicleId}", "/vehicle_images/**", "/api/**", "/**").permitAll()
 				.anyRequest().authenticated())
 		.formLogin(form->form.loginPage("/login").loginProcessingUrl("/login")
 				.successHandler(customSuccessHandler).permitAll())

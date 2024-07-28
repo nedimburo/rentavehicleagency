@@ -7,9 +7,13 @@ import java.util.List;
 
 import com.example.rentavehicleagency.businesses.Business;
 import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
+import com.example.rentavehicleagency.businesses.payloads.BusinessRequestDto;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.rentavehicleagency.requests.entities.RequestEntity;
@@ -21,31 +25,37 @@ import com.example.rentavehicleagency.businesses.repositories.BusinessRepository
 @RequiredArgsConstructor
 public class BusinessService implements Business {
 
-	private final BusinessRepository businessRepository;
-	
-	public void registerNewBusiness(BusinessEntity businessEntity) {
+	private final BusinessRepository repository;
+
+	@Transactional
+	public ResponseEntity<?> addNewBusiness(BusinessRequestDto businessRequestDto) {
+		BusinessEntity businessEntity = new BusinessEntity();
+		businessEntity.setName(businessRequestDto.getName());
+		businessEntity.setAddress(businessRequestDto.getAddress());
+		businessEntity.setCity(businessRequestDto.getCity());
 		businessEntity.setCreationDate(LocalDate.now());
 		businessEntity.setProfit(0);
-		businessRepository.save(businessEntity);
+		repository.save(businessEntity);
+		return new ResponseEntity<>("Business has been created successfully.", HttpStatus.OK);
 	}
 	
 	public List<BusinessEntity> getAllBusinesses(){
-		return businessRepository.findAll();
+		return repository.findAll();
 	}
 	
 	public BusinessEntity findBusinessByName(String name) {
-		return businessRepository.findByName(name);
+		return repository.findByName(name);
 	}
 	
 	public BusinessEntity getBusinessById(Long id) {
-		return businessRepository.findById(id).orElse(null);
+		return repository.findById(id).orElse(null);
 	}
 	
 	public void registerProfit(BusinessEntity businessEntity, RequestEntity requestEntity) {
 		long daysDifference=calculateDaysDifference(requestEntity.getStartTime(), requestEntity.getEndTime());
 		float profitFromRequest= requestEntity.getVehicleEntity().getPrice()*daysDifference;
 		businessEntity.setProfit(profitFromRequest+ businessEntity.getProfit());
-		businessRepository.save(businessEntity);
+		repository.save(businessEntity);
 	}
 	
 	public long calculateDaysDifference(LocalDateTime dateTime1, LocalDateTime dateTime2) {

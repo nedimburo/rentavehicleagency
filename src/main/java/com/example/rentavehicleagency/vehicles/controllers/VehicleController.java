@@ -19,7 +19,7 @@ import com.example.rentavehicleagency.vehicles.services.VehicleService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("public/vehicle")
-@Tags(value = {@Tag(name = "Public | Vehicle"), @Tag(name = "operationIdNamePublicVehicle")})
+@Tags(value = @Tag(name = "Public | Vehicle"))
 public class VehicleController {
 
 	private final VehicleService vehicleService;

@@ -20,7 +20,7 @@ import com.example.rentavehicleagency.users.services.UserService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("public/director")
-@Tags(value = {@Tag(name = "Public | Director"), @Tag(name = "operationIdNamePublicDirector")})
+@Tags(value = @Tag(name = "Public | Director"))
 public class DirectorController {
 
 	private final DirectorService directorService;

@@ -21,7 +21,7 @@ import com.example.rentavehicleagency.users.services.UserService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("public/report")
-@Tags(value = {@Tag(name = "Public | Report"), @Tag(name = "operationIdNamePublicReport")})
+@Tags(value = @Tag(name = "Public | Report"))
 public class ReportController {
 
 	private final ReportService reportService;
