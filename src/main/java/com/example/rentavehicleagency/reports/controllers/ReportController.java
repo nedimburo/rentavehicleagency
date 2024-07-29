@@ -1,5 +1,6 @@
 package com.example.rentavehicleagency.reports.controllers;
 
+import com.example.rentavehicleagency.reports.payloads.AllReportsResponseDto;
 import com.example.rentavehicleagency.reports.payloads.ReportRequestDto;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.reports.services.ReportService;
 
+import java.util.List;
+
 @Slf4j
 @Getter
 @RestController
@@ -19,10 +22,15 @@ import com.example.rentavehicleagency.reports.services.ReportService;
 @Tags(value = @Tag(name = "Public | Report"))
 public class ReportController {
 
-	private final ReportService reportService;
+	private final ReportService service;
 	
 	@PostMapping("/add-new-report")
-	private ResponseEntity<?> addNewReport(@RequestBody ReportRequestDto reportRequestDto) {
-		return  reportService.addNewReport(reportRequestDto);
+	public ResponseEntity<?> addNewReport(@RequestBody ReportRequestDto reportRequestDto) {
+		return  service.addNewReport(reportRequestDto);
+	}
+
+	@GetMapping("/get-all-reports")
+	public List<AllReportsResponseDto> getAllReports(){
+		return service.getAllReports();
 	}
 }

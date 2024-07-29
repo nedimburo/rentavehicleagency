@@ -6,7 +6,6 @@ import com.example.rentavehicleagency.employees.entities.EmployeeEntity;
 import com.example.rentavehicleagency.reports.Report;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter
@@ -28,7 +27,6 @@ public class ReportEntity implements Report {
 	private String content;
 
 	@Column(name = "priority")
-	@ColumnDefault("LOW")
 	@Enumerated(EnumType.STRING)
 	private PriorityType priority = PriorityType.LOW;
 	

@@ -1,10 +1,12 @@
 package com.example.rentavehicleagency.reports.services;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.rentavehicleagency.employees.entities.EmployeeEntity;
 import com.example.rentavehicleagency.employees.services.EmployeeService;
+import com.example.rentavehicleagency.reports.payloads.AllReportsResponseDto;
 import com.example.rentavehicleagency.reports.payloads.ReportRequestDto;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
@@ -39,9 +41,20 @@ public class ReportService {
 		repository.save(reportEntity);
 		return new ResponseEntity<>("Report has been created successfully.", HttpStatus.OK);
 	}
-	
-	public List<ReportEntity> getAllReports(){
-		return repository.findAll();
+
+	@Transactional
+	public List<AllReportsResponseDto> getAllReports(){
+		List<ReportEntity> allReports = repository.findAll();
+		List<AllReportsResponseDto> responseReports = new ArrayList<>();
+		for (ReportEntity report : allReports){
+			AllReportsResponseDto formattedReport = new AllReportsResponseDto();
+			formattedReport.setId(report.getId());
+			formattedReport.setTitle(report.getTitle());
+			formattedReport.setContent(report.getContent());
+			formattedReport.setPriority(report.getPriority().toString());
+			formattedReport.setCreationDate(report.getCreationDate().toString());
+		}
+		return responseReports;
 	}
 	
 	public List<ReportEntity> findReportsByEmployeeId(Long employeeId){

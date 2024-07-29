@@ -2,12 +2,14 @@ package com.example.rentavehicleagency.employees.controllers;
 
 import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
 import com.example.rentavehicleagency.employees.entities.EmployeeEntity;
+import com.example.rentavehicleagency.employees.services.RemoveEmployeeService;
 import com.example.rentavehicleagency.users.entities.UserEntity;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.employees.payloads.EmployeeDto;
@@ -23,11 +25,10 @@ import com.example.rentavehicleagency.users.services.UserService;
 @Tags(value = @Tag(name = "Public | Employee"))
 public class EmployeeController {
 
-	private final EmployeeService employeeService;
-
+	private final EmployeeService service;
 	private final BusinessService businessService;
-	
 	private final UserService userService;
+	private final RemoveEmployeeService removeEmployeeService;
 	
 	@PostMapping("/add-employee-submit")
 	public String submitEmployee(@ModelAttribute("employeeDto") EmployeeDto employeeDto) {
@@ -53,7 +54,7 @@ public class EmployeeController {
 		newEmployeeEntity.setEmploymentStatus(employeeDto.getEmploymentStatus());
 		newEmployeeEntity.setUserEntity(newRegisteredUserEntity);
 		newEmployeeEntity.setBusinessEntity(businessEntity);
-		employeeService.setEmployee(newEmployeeEntity);
+		service.setEmployee(newEmployeeEntity);
 		return "redirect:/owner-page";
 	}
 	
@@ -81,13 +82,12 @@ public class EmployeeController {
 		newEmployeeEntity.setEmploymentStatus(employeeDto.getEmploymentStatus());
 		newEmployeeEntity.setUserEntity(newRegisteredUserEntity);
 		newEmployeeEntity.setBusinessEntity(businessEntity);
-		employeeService.setEmployee(newEmployeeEntity);
+		service.setEmployee(newEmployeeEntity);
 		return "redirect:/hr-page";
 	}
-	
-	@GetMapping("/fire-employee/{id}")
-	public String fireEmployee(@PathVariable Long id) {
-		employeeService.fireEmployee(id);
-		return "redirect:/hr-page";
+
+	@DeleteMapping("/fire-employee/{id}")
+	public ResponseEntity<?> fireEmployee(@PathVariable Long id){
+		return removeEmployeeService.fireEmployee(id);
 	}
 }
