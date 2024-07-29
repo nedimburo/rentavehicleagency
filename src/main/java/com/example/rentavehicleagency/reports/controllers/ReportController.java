@@ -33,4 +33,9 @@ public class ReportController {
 	public List<AllReportsResponseDto> getAllReports(){
 		return service.getAllReports();
 	}
+
+	@DeleteMapping("/delete-report/{id}")
+	public ResponseEntity<?> deleteReport(@PathVariable Long id){
+		return service.deleteReportById(id);
+	}
 }

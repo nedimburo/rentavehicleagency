@@ -2,10 +2,12 @@ package com.example.rentavehicleagency.employees.services;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import com.example.rentavehicleagency.employees.Employee;
 import com.example.rentavehicleagency.employees.entities.EmployeeEntity;
 import com.example.rentavehicleagency.users.services.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,5 +36,10 @@ public class EmployeeService implements Employee {
 	
 	public List<EmployeeEntity> getAllEmployeesFromBusiness(Long businessId){
 		return repository.findByBusinessEntityId(businessId);
+	}
+
+	public EmployeeEntity findById(Long id){
+		Optional<EmployeeEntity> employee = repository.findById(id);
+		return employee.orElseThrow(() -> new EntityNotFoundException("Employee not found"));
 	}
 }

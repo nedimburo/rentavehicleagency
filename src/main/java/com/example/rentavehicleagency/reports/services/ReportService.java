@@ -7,6 +7,7 @@ import java.util.List;
 import com.example.rentavehicleagency.employees.entities.EmployeeEntity;
 import com.example.rentavehicleagency.employees.services.EmployeeService;
 import com.example.rentavehicleagency.reports.payloads.AllReportsResponseDto;
+import com.example.rentavehicleagency.reports.payloads.ReportEmployeeDto;
 import com.example.rentavehicleagency.reports.payloads.ReportRequestDto;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
@@ -53,6 +54,16 @@ public class ReportService {
 			formattedReport.setContent(report.getContent());
 			formattedReport.setPriority(report.getPriority().toString());
 			formattedReport.setCreationDate(report.getCreationDate().toString());
+			EmployeeEntity employee = employeeService.findById(report.getEmployeeEntity().getId());
+			ReportEmployeeDto formattedEmployee = new ReportEmployeeDto();
+			formattedEmployee.setId(employee.getUserEntity().getId());
+			formattedEmployee.setFirstName(employee.getUserEntity().getFirstName());
+			formattedEmployee.setLastName(employee.getUserEntity().getLastName());
+			formattedEmployee.setNickname(employee.getUserEntity().getNickname());
+			formattedEmployee.setEmail(employee.getUserEntity().getEmail());
+			formattedEmployee.setRole(employee.getUserEntity().getRole());
+			formattedReport.setEmployee(formattedEmployee);
+			responseReports.add(formattedReport);
 		}
 		return responseReports;
 	}
@@ -60,9 +71,11 @@ public class ReportService {
 	public List<ReportEntity> findReportsByEmployeeId(Long employeeId){
 		return repository.findByEmployeeEntityId(employeeId);
 	}
-	
-	public void deleteReportById(Long id) {
+
+	@Transactional
+	public ResponseEntity<?> deleteReportById(Long id) {
 		repository.deleteById(id);
+		return new ResponseEntity<>("Report has been deleted successfully.", HttpStatus.OK);
 	}
 
 }
