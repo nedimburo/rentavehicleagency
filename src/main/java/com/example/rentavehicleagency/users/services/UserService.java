@@ -2,14 +2,20 @@ package com.example.rentavehicleagency.users.services;
 
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import com.example.rentavehicleagency.clients.services.ClientService;
 import com.example.rentavehicleagency.configuration.service.FileStorageService;
 import com.example.rentavehicleagency.users.User;
+import com.example.rentavehicleagency.users.entities.RoleType;
 import com.example.rentavehicleagency.users.entities.UserEntity;
+import com.example.rentavehicleagency.users.payloads.RegistrationRequestDto;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,40 +28,50 @@ import com.example.rentavehicleagency.users.repositories.UserRepository;
 @RequiredArgsConstructor
 public class UserService implements User {
 
-	private final UserRepository userRepository;
+	private final UserRepository repository;
 	
 	private final PasswordEncoder passwordEncoder;
 	
 	private final ClientService clientService;
 	
 	private final FileStorageService fileStorageService;
-	
-	public void registerUser(UserEntity userEntity) {
-		userEntity.setProfileImage("default_user_image.jpg");
-		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-		userEntity.setRole("USER");
-		userRepository.save(userEntity);
-		clientService.assignUserToClient(userEntity);
+
+	@Transactional
+	public ResponseEntity<?> registerUser(RegistrationRequestDto registrationRequestDto) {
+		UserEntity user = new UserEntity();
+		user.setFirstName(registrationRequestDto.getFirstName());
+		user.setLastName(registrationRequestDto.getLastName());
+		user.setEmail(registrationRequestDto.getEmail());
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setNickname(registrationRequestDto.getNickname());
+		user.setGender(registrationRequestDto.getGender());
+		final LocalDate dt = LocalDate.parse(registrationRequestDto.getBirthDate());
+		user.setBirthDate(dt);
+		user.setRole(RoleType.USER);
+		user.setProfileImage("default_user_image.jpg");
+		repository.save(user);
+		clientService.assignUserToClient(user);
+		return new ResponseEntity<>("User has been successfully registered.", HttpStatus.OK);
 	}
 	
 	
 	public UserEntity getUserByEmail(String email) {
-		return userRepository.findByEmail(email);
+		return repository.findByEmail(email);
 	}
 	
 	public UserEntity getUserByNickname(String nickname) {
-		return userRepository.findByNickname(nickname);
+		return repository.findByNickname(nickname);
 	}
 	
 	public UserEntity getUserById(Long id) {
-		return userRepository.findById(id).orElse(null);
+		return repository.findById(id).orElse(null);
 	}
 	
 	public void setProfileImage(UserEntity userEntity, MultipartFile image) {
 		try {
 			String imageUrl=fileStorageService.storeUserImage(image);
 			userEntity.setProfileImage(imageUrl);
-			userRepository.save(userEntity);
+			repository.save(userEntity);
 		}catch(IOException e) {
 			throw new RuntimeException("Error during file upload: "+e.getMessage());
 		}
@@ -63,10 +79,10 @@ public class UserService implements User {
 	
 	public void saveUserInstance(UserEntity userEntity) {
 		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-		userRepository.save(userEntity);
+		repository.save(userEntity);
 	}
 	
 	public void deleteUserById(Long id) {
-		userRepository.deleteById(id);
+		repository.deleteById(id);
 	}
 }

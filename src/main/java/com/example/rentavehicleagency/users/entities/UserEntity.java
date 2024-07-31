@@ -4,13 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import com.example.rentavehicleagency.users.User;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -40,10 +34,12 @@ public class UserEntity implements User {
 	private String nickname;
 
 	@Column(name = "role")
-	private String role;
+	@Enumerated(EnumType.STRING)
+	private RoleType role;
 
 	@Column(name = "gender")
-	private String gender;
+	@Enumerated(EnumType.STRING)
+	private Gender gender = Gender.MALE;
 	
 	@Column(name="birth_date")
 	private LocalDate birthDate;

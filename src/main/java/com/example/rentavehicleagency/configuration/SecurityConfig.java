@@ -1,5 +1,6 @@
 package com.example.rentavehicleagency.configuration;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,13 +17,12 @@ import com.example.rentavehicleagency.configuration.service.CustomUserDetailsSer
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-	@Autowired
-	CustomSuccessHandler customSuccessHandler;
+	private final CustomSuccessHandler customSuccessHandler;
 	
-	@Autowired
-	CustomUserDetailsService customUserDetailsService;
+	private final CustomUserDetailsService customUserDetailsService;
 	
 	@Bean
 	public static PasswordEncoder passwordEncoder() {
