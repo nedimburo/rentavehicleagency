@@ -18,8 +18,8 @@ import java.util.List;
 @Getter
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("public/report")
-@Tags(value = @Tag(name = "Public | Report"))
+@RequestMapping("employee/report")
+@Tags(value = @Tag(name = "Employee | Report"))
 public class ReportController {
 
 	private final ReportService service;

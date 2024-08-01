@@ -1,5 +1,6 @@
 package com.example.rentavehicleagency.configuration;
 
+import com.example.rentavehicleagency.users.entities.RoleType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.rentavehicleagency.configuration.service.CustomUserDetailsService;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -22,6 +24,7 @@ import com.example.rentavehicleagency.configuration.service.CustomUserDetailsSer
 public class SecurityConfig {
 	
 	private final CustomUserDetailsService customUserDetailsService;
+	private final JwtAuthFilter jwtAuthFilter;
 	
 	@Bean
 	public static PasswordEncoder passwordEncoder() {
@@ -41,6 +44,7 @@ public class SecurityConfig {
 						.requestMatchers("/api/**", "/**").permitAll()
 						.anyRequest().authenticated())
 				.authenticationManager(authenticationManager)
+				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 				.build();
 	}
 
