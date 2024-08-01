@@ -1,4 +1,4 @@
-package com.example.rentavehicleagency.users.payloads;
+package com.example.rentavehicleagency.auth.payloads;
 
 import com.example.rentavehicleagency.users.entities.Gender;
 import lombok.AllArgsConstructor;

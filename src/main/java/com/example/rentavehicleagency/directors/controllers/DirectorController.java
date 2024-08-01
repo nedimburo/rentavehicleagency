@@ -2,6 +2,8 @@ package com.example.rentavehicleagency.directors.controllers;
 
 import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
 import com.example.rentavehicleagency.directors.entities.DirectorEntity;
+import com.example.rentavehicleagency.users.entities.Gender;
+import com.example.rentavehicleagency.users.entities.RoleType;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.Getter;
@@ -37,8 +39,8 @@ public class DirectorController {
 		userEntity.setEmail(directorDto.getEmail());
 		userEntity.setPassword(directorDto.getPassword());
 		userEntity.setNickname(directorDto.getNickname());
-		userEntity.setRole("DIRECTOR");
-		userEntity.setGender(directorDto.getGender());
+		userEntity.setRole(RoleType.DIRECTOR);
+		userEntity.setGender(Gender.valueOf(directorDto.getGender()));
 		userEntity.setBirthDate(directorDto.getBirthDate());
 		userEntity.setProfileImage("default_user_image.jpg");
 		userService.saveUserInstance(userEntity);

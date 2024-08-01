@@ -61,7 +61,7 @@ public class ReportService {
 			formattedEmployee.setLastName(employee.getUserEntity().getLastName());
 			formattedEmployee.setNickname(employee.getUserEntity().getNickname());
 			formattedEmployee.setEmail(employee.getUserEntity().getEmail());
-			formattedEmployee.setRole(employee.getUserEntity().getRole());
+			formattedEmployee.setRole(String.valueOf(employee.getUserEntity().getRole()));
 			formattedReport.setEmployee(formattedEmployee);
 			responseReports.add(formattedReport);
 		}
