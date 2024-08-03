@@ -3,10 +3,12 @@ package com.example.rentavehicleagency.businesses.services;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.rentavehicleagency.businesses.Business;
 import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
+import com.example.rentavehicleagency.businesses.payloads.BusinessResponseDto;
 import com.example.rentavehicleagency.businesses.payloads.BusinessRequestDto;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
@@ -38,9 +40,21 @@ public class BusinessService implements Business {
 		repository.save(businessEntity);
 		return new ResponseEntity<>("Business has been created successfully.", HttpStatus.OK);
 	}
-	
-	public List<BusinessEntity> getAllBusinesses(){
-		return repository.findAll();
+
+	@Transactional
+	public List<BusinessResponseDto> getAllBusinesses(){
+		List<BusinessEntity> allBusinesses = repository.findAll();
+		List<BusinessResponseDto> responseBusinesses = new ArrayList<>();
+		for (BusinessEntity business : allBusinesses){
+			BusinessResponseDto formattedBusiness = new BusinessResponseDto();
+			formattedBusiness.setName(business.getName());
+			formattedBusiness.setAddress(business.getAddress());
+			formattedBusiness.setCity(business.getCity());
+			formattedBusiness.setProfit(business.getProfit());
+			formattedBusiness.setCreationDate(business.getCreationDate().toString());
+			responseBusinesses.add(formattedBusiness);
+		}
+		return responseBusinesses;
 	}
 	
 	public BusinessEntity findBusinessByName(String name) {
