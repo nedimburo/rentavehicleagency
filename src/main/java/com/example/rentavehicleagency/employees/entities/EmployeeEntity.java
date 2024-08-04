@@ -5,16 +5,7 @@ import java.time.LocalDate;
 import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
 import com.example.rentavehicleagency.employees.Employee;
 import com.example.rentavehicleagency.users.entities.UserEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -45,7 +36,8 @@ public class EmployeeEntity implements Employee {
 	private String contactNumber;
 	
 	@Column(name="employment_status")
-	private String employmentStatus;
+	@Enumerated(EnumType.STRING)
+	private EmploymentStatus employmentStatus;
 	
 	@Column(name="hire_date")
 	private LocalDate hireDate;

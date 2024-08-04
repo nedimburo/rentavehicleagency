@@ -16,7 +16,6 @@ public class DirectorRequestDto {
 	private String email;
 	private String password;
 	private String nickname;
-	private String role;
 	private Gender gender;
 	private String birthDate;
 	private String jmbg;
