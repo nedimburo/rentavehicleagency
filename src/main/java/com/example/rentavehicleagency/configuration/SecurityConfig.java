@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -56,7 +57,7 @@ public class SecurityConfig {
 						.requestMatchers(HttpMethod.POST, "/api/v1/public/auth/register-user/**").permitAll()
 						.requestMatchers(HttpMethod.POST, "/api/v1/public/auth/login/**").permitAll()
 						.requestMatchers(HttpMethod.GET, "/authentication-docs/**").permitAll()
-						.requestMatchers("/api/**", "/**").permitAll()
+						.requestMatchers("/public/**").permitAll()
 						.anyRequest().authenticated())
 				.authenticationManager(authenticationManager)
 				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
@@ -68,5 +69,12 @@ public class SecurityConfig {
 		AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
 		authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
 		return authenticationManagerBuilder.build();
+	}
+
+	@Bean
+	public WebSecurityCustomizer webSecurityCustomizer() {
+		return web -> web.ignoring().requestMatchers(
+				"/swagger-ui/**", "/v3/api-docs/**"
+		);
 	}
 }
