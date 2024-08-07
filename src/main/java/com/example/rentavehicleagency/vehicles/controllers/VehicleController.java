@@ -1,5 +1,6 @@
 package com.example.rentavehicleagency.vehicles.controllers;
 
+import com.example.rentavehicleagency.vehicles.entities.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.Getter;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.rentavehicleagency.vehicles.payloads.VehicleDto;
 import com.example.rentavehicleagency.businesses.entities.BusinessEntity;
-import com.example.rentavehicleagency.vehicles.entities.VehicleEntity;
 import com.example.rentavehicleagency.businesses.services.BusinessService;
 import com.example.rentavehicleagency.vehicleImages.services.VehicleImageService;
 import com.example.rentavehicleagency.vehicles.services.VehicleService;
@@ -38,11 +38,11 @@ public class VehicleController {
 		vehicleEntity.setRegistrationPlate(vehicleDto.getRegistrationPlate());
 		vehicleEntity.setEngineDisplacement(vehicleDto.getEngineDisplacement());
 		vehicleEntity.setHorsepower(vehicleDto.getHorsepower());
-		vehicleEntity.setFuel(vehicleDto.getFuel());
-		vehicleEntity.setTransmission(vehicleDto.getTransmission());
+		vehicleEntity.setFuel(FuelType.valueOf(vehicleDto.getFuel()));
+		vehicleEntity.setTransmission(TransmissionType.valueOf(vehicleDto.getTransmission()));
 		vehicleEntity.setColor(vehicleDto.getColor());
-		vehicleEntity.setType(vehicleDto.getType());
-		vehicleEntity.setBodyShape(vehicleDto.getBodyShape());
+		vehicleEntity.setType(VehicleType.valueOf(vehicleDto.getType()));
+		vehicleEntity.setBodyShape(BodyShape.valueOf(vehicleDto.getBodyShape()));
 		vehicleEntity.setStatus(vehicleDto.getStatus());
 		vehicleEntity.setPrice(vehicleDto.getPrice());
 		vehicleEntity.setAddedDate(vehicleDto.getAddedDate());

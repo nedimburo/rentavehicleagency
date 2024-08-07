@@ -57,9 +57,9 @@ public class VehicleService implements Vehicle {
 			newVehicleDisplay.setModelName(allVehicleEntities.get(i).getModelName());
 			newVehicleDisplay.setModelYear(allVehicleEntities.get(i).getModelYear());
 			newVehicleDisplay.setHorsepower(allVehicleEntities.get(i).getHorsepower());
-			newVehicleDisplay.setTransmission(allVehicleEntities.get(i).getTransmission());
-			newVehicleDisplay.setFuel(allVehicleEntities.get(i).getFuel());
-			newVehicleDisplay.setBodyType(allVehicleEntities.get(i).getBodyShape());
+			newVehicleDisplay.setTransmission(String.valueOf(allVehicleEntities.get(i).getTransmission()));
+			newVehicleDisplay.setFuel(String.valueOf(allVehicleEntities.get(i).getFuel()));
+			newVehicleDisplay.setBodyType(String.valueOf(allVehicleEntities.get(i).getBodyShape()));
 			newVehicleDisplay.setStatus(allVehicleEntities.get(i).getStatus());
 			newVehicleDisplay.setPrice(allVehicleEntities.get(i).getPrice());
 			for (int j=0; j<allVehicleImages.size(); j++) {
