@@ -55,8 +55,10 @@ public class VehicleEntity implements Vehicle {
 	@Column(name = "body_shape")
 	@Enumerated(EnumType.STRING)
 	private BodyShape bodyShape;
-	
-	private String status;
+
+	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
+	private VehicleStatus status;
 
 	@Column(name = "price")
 	private float price;

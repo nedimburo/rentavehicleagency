@@ -1,8 +1,11 @@
 package com.example.rentavehicleagency.vehicles.payloads;
 
-import java.time.LocalDate;
 import java.util.List;
 
+import com.example.rentavehicleagency.vehicles.entities.BodyShape;
+import com.example.rentavehicleagency.vehicles.entities.FuelType;
+import com.example.rentavehicleagency.vehicles.entities.TransmissionType;
+import com.example.rentavehicleagency.vehicles.entities.VehicleType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,21 +16,19 @@ import org.springframework.web.multipart.MultipartFile;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class VehicleDto {
+public class VehicleRequestDto {
 	private String brand;
 	private String modelName;
 	private int modelYear;
 	private String registrationPlate;
 	private int engineDisplacement;
 	private int horsepower;
-	private String fuel;	
-	private String transmission;	
+	private FuelType fuel;
+	private TransmissionType transmission;
 	private String color;	
-	private String type;
-	private String bodyShape;
-	private String status;
+	private VehicleType type;
+	private BodyShape bodyShape;
 	private float price;
-	private LocalDate addedDate;
 	private String businessName;
 	private List<MultipartFile> images;
 }
