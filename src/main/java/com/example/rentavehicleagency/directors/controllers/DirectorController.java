@@ -15,8 +15,8 @@ import com.example.rentavehicleagency.directors.services.DirectorService;
 @Getter
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("public/director")
-@Tags(value = @Tag(name = "Public | Director"))
+@RequestMapping("owner/director")
+@Tags(value = @Tag(name = "Owner | Director"))
 public class DirectorController {
 
 	private final DirectorService service;

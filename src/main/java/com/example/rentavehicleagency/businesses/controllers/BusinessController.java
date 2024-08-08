@@ -18,8 +18,8 @@ import java.util.List;
 @Getter
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("public/business")
-@Tags(value = @Tag(name = "Public | Business"))
+@RequestMapping("owner/business")
+@Tags(value = @Tag(name = "Owner | Business"))
 public class BusinessController {
 
 	private final BusinessService service;

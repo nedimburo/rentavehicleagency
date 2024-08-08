@@ -16,8 +16,8 @@ import com.example.rentavehicleagency.employees.services.EmployeeService;
 @Getter
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("public/employee")
-@Tags(value = @Tag(name = "Public | Employee"))
+@RequestMapping("manage/employee")
+@Tags(value = @Tag(name = "Manage | Employee"))
 public class EmployeeController {
 
 	private final EmployeeService service;
